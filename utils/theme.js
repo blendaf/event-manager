@@ -6,15 +6,10 @@ const fontNames = {
 const theme = {
   colors: {
     white: '#fff',
-    black: '#3C3C3C',
-    focusBackground: '#EDEDED',
-    border: '#CCCCCC',
-    primary: '#05B8E6',
-    primaryMuted: '#86C6DE',
-    primaryInactive: 'rgba(5, 184, 230, 0.5)',
-    primaryMutedInactive: 'rgba(134, 198, 222, 0.5)',
-    primaryHighlighted: '#0AA0DE',
-    selection: '#86C6DE'
+    black: '#232C09',
+    blue: '#31D6E0',
+    lightgreen: '#B3E031',
+    green: '#85A627'
   },
   fonts: {
     title: `'${fontNames.title}', '${fontNames.text}', sans-serif`,
