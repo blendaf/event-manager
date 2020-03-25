@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { db } from '../utils/firebaseConfig'
-import firestore from '../utils/firebaseConfig'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -63,9 +62,22 @@ const Button = styled.button`
   font-size: 20px;
 `
 
-export default () => {
+const Index = props => {
   const [inputValue, setInputValue] = useState('')
-  const test = () => db.collection('eventpages').add({ pid: 'test2' })
+  const [data, setData] = useState({})
+  const test = () =>
+    db
+      .collection('eventpages')
+      .where('pid', '==', inputValue)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          // setData(doc.data())
+        })
+      })
+      .catch(function(error) {
+        console.log('Error getting documents: ', error)
+      })
 
   return (
     <React.Fragment>
@@ -89,3 +101,5 @@ export default () => {
     </React.Fragment>
   )
 }
+
+export default Index
