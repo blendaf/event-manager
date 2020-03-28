@@ -57,7 +57,7 @@ const Button = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
   border: none;
-  width: 80px;
+  width: 200px;
   height: 40px;
   font-size: 20px;
 `
@@ -65,19 +65,17 @@ const Button = styled.button`
 const Index = props => {
   const [inputValue, setInputValue] = useState('')
   const [data, setData] = useState({})
-  const test = () =>
-    db
-      .collection('eventpages')
+  const test = () => {
+    db.collection('eventpages')
       .where('pid', '==', inputValue)
       .get()
       .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          // setData(doc.data())
-        })
+        querySnapshot.forEach(function(doc) {})
       })
       .catch(function(error) {
         console.log('Error getting documents: ', error)
       })
+  }
 
   return (
     <React.Fragment>
@@ -92,7 +90,7 @@ const Index = props => {
           </ID>
 
           <Link href="event/[pid]" as={`event/${inputValue}`}>
-            <Button onClick={test}>GO</Button>
+            <Button onClick={test}>Go to Event</Button>
           </Link>
         </CenterWrapper>
       </Container>

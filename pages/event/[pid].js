@@ -7,6 +7,7 @@ import { ArrowDropDown as Arrow } from '@styled-icons/material-outlined/ArrowDro
 import { CalendarToday as Calendar } from '@styled-icons/material-rounded/CalendarToday'
 import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../../utils/screen-sizes'
+import ErrorBox from '../../fragments/ErrorBox'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -146,74 +147,93 @@ const EventPage = props => {
 
   const toggleVisibility = () => setVisibility(visible => !visible)
 
-  console.log(`test:${props.pid}`)
+  console.log({ props })
 
-  return (
-    <>
-      <GlobalStyle />
-      <Container>
-        <EventCard>
-          <Title>{props.title}</Title>
-        </EventCard>
-        <MoreInfo>
-          <div>More Info</div>
+  console.log(props.res)
 
-          <ArrowDown />
-        </MoreInfo>
-      </Container>
+  if (!props.error) {
+    return (
+      <>
+        <GlobalStyle />
+        <ErrorBox>{props.error}</ErrorBox>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <GlobalStyle />
+        <Container>
+          <EventCard>
+            <Title>{props.title}</Title>
+          </EventCard>
+          <MoreInfo>
+            <div>More Info</div>
 
-      <Container narrow>
-        <InfoBox>
-          <Cal />
-          <InfoText>{props.date}</InfoText>
-          <InfoText>{props.time}</InfoText>
-        </InfoBox>
-        <MapBox>
+            <ArrowDown />
+          </MoreInfo>
+        </Container>
+
+        <Container narrow>
           <InfoBox>
-            <Pin />
-            <InfoText>{props.address}</InfoText>
+            <Cal />
+            <InfoText>{props.date}</InfoText>
+            <InfoText>{props.time}</InfoText>
           </InfoBox>
-        </MapBox>
+          <MapBox>
+            <InfoBox>
+              <Pin />
+              <InfoText>{props.address}</InfoText>
+            </InfoBox>
+          </MapBox>
 
-        <RSVPForm visibility={visibility}>
-          <InputTitle>Name</InputTitle>
-          <RSVPInput></RSVPInput>
-          <InputTitle>Name</InputTitle>
-          <RSVPInput></RSVPInput>
-          <InputTitle>Name</InputTitle>
-          <RSVPInput></RSVPInput>
-          <InputTitle>Name</InputTitle>
-          <RSVPInput></RSVPInput>
-        </RSVPForm>
-        <ButtonWrapper>
-          <Button onClick={toggleVisibility} visibility={visibility}>
-            RSVP
-          </Button>
-        </ButtonWrapper>
-      </Container>
-    </>
-  )
+          <RSVPForm visibility={visibility}>
+            <InputTitle>Name</InputTitle>
+            <RSVPInput></RSVPInput>
+            <InputTitle>Name</InputTitle>
+            <RSVPInput></RSVPInput>
+            <InputTitle>Name</InputTitle>
+            <RSVPInput></RSVPInput>
+            <InputTitle>Name</InputTitle>
+            <RSVPInput></RSVPInput>
+          </RSVPForm>
+          <ButtonWrapper>
+            <Button onClick={toggleVisibility} visibility={visibility}>
+              RSVP
+            </Button>
+          </ButtonWrapper>
+        </Container>
+      </>
+    )
+  }
 }
 
-EventPage.getInitialProps = async function() {
-  const res = await db
-    .collection('eventpages')
-    .doc('UpJR9oHQwOXs8Y6DX2rL')
-    .get()
-    .then(function(doc) {
-      if (doc.exists) {
-        return doc.data()
-      } else {
-        console.log('No such document!')
-      }
-    })
-    .catch(function(error) {
-      console.log('Error getting document:', error)
-    })
-
-  console.log(res)
-
-  return res
+export async function getServerSideProps(context) {
+  const data = 'hej'
+  return { props: { data } }
 }
+
+// EventPage.getInitialProps = async function() {
+//   const router = useRouter()
+//   const { pid } = router.query
+//   const res = await db
+//     .collection('eventpages')
+//     .where('pid', '==', pid)
+//     .get()
+//     .then(function(doc) {
+//       if (doc.exists) {
+//         return doc.data()
+//       } else {
+//         console.log('No such document!')
+//       }
+//     })
+//     .catch(function(error) {
+//       console.log(error)
+//       return { message: 'Error getting document:', error: error }
+//     })
+
+//   console.log(res)
+
+//   return res
+// }
 
 export default EventPage
