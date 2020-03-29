@@ -7,7 +7,7 @@ import { db } from '../utils/firebaseConfig'
 
 const GlobalStyle = createGlobalStyle`
   body {
-   background-color: ${props => props.theme.colors.white};
+   background-color: ${props => props.theme.colors.blue};
    margin: 0;
   }
 `
@@ -34,48 +34,47 @@ const ID = styled.form`
 `
 const IDInput = styled.input`
   border-radius: 5px;
-  border: solid 3px ${({ theme }) => theme.colors.blue};
-  background-color: ${({ theme }) => theme.colors.white};
+  border: solid 3px ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.blue};
   text-align: center;
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.white};
   width: 400px;
   height: 50px;
   font-size: 20px;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.blue};
-    opacity: 1; /* Firefox */
+    color: ${({ theme }) => theme.colors.white};
+    opacity: 1;
   }
 
   &:focus {
-    outline-color: ${({ theme }) => theme.colors.blue};
+    outline: none;
+    -webkit-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+    -moz-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+    box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
   }
 `
 const Button = styled.button`
-  background-color: ${({ theme }) => theme.colors.lightgreen};
+  background-color: ${({ theme }) => theme.colors.white};
   margin: 10px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.blue};
   border-radius: 5px;
   border: none;
   width: 200px;
   height: 40px;
   font-size: 20px;
+
+  &:focus {
+    outline: none;
+    -webkit-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+    -moz-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+    box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+  }
 `
 
 const Index = props => {
   const [inputValue, setInputValue] = useState('')
   const [data, setData] = useState({})
-  const test = () => {
-    db.collection('eventpages')
-      .where('pid', '==', inputValue)
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {})
-      })
-      .catch(function(error) {
-        console.log('Error getting documents: ', error)
-      })
-  }
 
   return (
     <React.Fragment>
@@ -88,13 +87,11 @@ const Index = props => {
               onChange={event => setInputValue(event.target.value)}
             ></IDInput>
           </ID>
-
           <Link href="event/[pid]" as={`event/${inputValue}`}>
-            <Button onClick={test}>Go to Event</Button>
+            <Button>Go to Event</Button>
           </Link>
         </CenterWrapper>
       </Container>
-
       <GlobalStyle />
     </React.Fragment>
   )

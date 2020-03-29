@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
@@ -18,11 +17,11 @@ const GlobalStyle = createGlobalStyle`
 
 const Container = styled.div`
   width: ${props => (props.narrow ? '40%' : '60%')};
-  height: 100vh;
+  height: 80vh;
   margin: 0 auto;
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    width: ${props => (props.narrow ? '40%' : '80%')};
+    width: ${props => (props.narrow ? '60%' : '80%')};
   }
 `
 
@@ -30,7 +29,7 @@ const EventCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 120px;
   background-color: ${props => props.theme.colors.blue};
   height: 400px;
   width: 100%;
@@ -62,13 +61,15 @@ const ArrowDown = styled(Arrow)`
   color: ${props => props.theme.colors.black};
 `
 
+const Section = styled.div`
+  margin: 100px 0;
+`
+
 const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
-  padding: 50px;
 `
 
 const InfoText = styled.div`
@@ -80,7 +81,24 @@ const Cal = styled(Calendar)`
   color: ${props => props.theme.colors.blue};
 `
 
-const MapBox = styled.div``
+const MapBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`
+
+const Map = styled.div`
+  background-color: ${props => props.theme.colors.blue};
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+`
 
 const Pin = styled(PinDrop)`
   width: 80px;
@@ -101,7 +119,7 @@ const Button = styled.button`
   width: 100px;
   height: 50px;
   transition: top 1s;
-  top: ${props => (props.visibility ? '2000px' : '1500px')};
+  top: ${props => (props.visible ? '2000px' : '1500px')};
   position: absolute;
 `
 
@@ -110,7 +128,7 @@ const RSVPForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  visibility: ${props => (props.visibility ? 'visible' : 'hidden')};
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
   margin: 20px;
 `
 const RSVPInput = styled.input`
@@ -140,53 +158,43 @@ const InputTitle = styled.h3`
   text-align: left;
 `
 
-const EventPage = props => {
-  const router = useRouter()
-  const { pid } = router.query
-  const [visibility, setVisibility] = useState(false)
+const EventPage = ({ res }) => {
+  const [visible, setVisible] = useState(false)
+  const toggleVisible = () => setVisible(oldVisible => !oldVisible)
 
-  const toggleVisibility = () => setVisibility(visible => !visible)
-
-  console.log({ props })
-
-  console.log(props.res)
-
-  if (!props.error) {
-    return (
-      <>
-        <GlobalStyle />
-        <ErrorBox>{props.error}</ErrorBox>
-      </>
-    )
+  if (res.error) {
+    return <ErrorBox>{res.error}</ErrorBox>
   } else {
     return (
       <>
         <GlobalStyle />
         <Container>
           <EventCard>
-            <Title>{props.title}</Title>
+            <Title>{res.title}</Title>
           </EventCard>
           <MoreInfo>
             <div>More Info</div>
-
             <ArrowDown />
           </MoreInfo>
         </Container>
-
         <Container narrow>
-          <InfoBox>
-            <Cal />
-            <InfoText>{props.date}</InfoText>
-            <InfoText>{props.time}</InfoText>
-          </InfoBox>
-          <MapBox>
+          <Section>
             <InfoBox>
-              <Pin />
-              <InfoText>{props.address}</InfoText>
+              <Cal />
+              <InfoText>{res.date}</InfoText>
+              <InfoText>{res.time}</InfoText>
             </InfoBox>
-          </MapBox>
-
-          <RSVPForm visibility={visibility}>
+          </Section>
+          <Section>
+            <MapBox>
+              <Map />
+              <InfoBox>
+                <Pin />
+                <InfoText>{res.address}</InfoText>
+              </InfoBox>
+            </MapBox>
+          </Section>
+          <RSVPForm visible={visible}>
             <InputTitle>Name</InputTitle>
             <RSVPInput></RSVPInput>
             <InputTitle>Name</InputTitle>
@@ -197,7 +205,7 @@ const EventPage = props => {
             <RSVPInput></RSVPInput>
           </RSVPForm>
           <ButtonWrapper>
-            <Button onClick={toggleVisibility} visibility={visibility}>
+            <Button onClick={toggleVisible} visible={visible}>
               RSVP
             </Button>
           </ButtonWrapper>
@@ -208,32 +216,24 @@ const EventPage = props => {
 }
 
 export async function getServerSideProps(context) {
-  const data = 'hej'
-  return { props: { data } }
+  const pid = context.params.pid
+
+  const res = await db
+    .collection('eventpages')
+    .doc(pid)
+    .get()
+    .then(function(doc) {
+      if (doc.exists) {
+        return doc.data()
+      } else {
+        return { error: true, message: 'No such event' }
+      }
+    })
+    .catch(function(error) {
+      console.log('Error getting document:', error)
+      return { error: error, message: 'Error getting documents' }
+    })
+  return { props: { res: res } }
 }
-
-// EventPage.getInitialProps = async function() {
-//   const router = useRouter()
-//   const { pid } = router.query
-//   const res = await db
-//     .collection('eventpages')
-//     .where('pid', '==', pid)
-//     .get()
-//     .then(function(doc) {
-//       if (doc.exists) {
-//         return doc.data()
-//       } else {
-//         console.log('No such document!')
-//       }
-//     })
-//     .catch(function(error) {
-//       console.log(error)
-//       return { message: 'Error getting document:', error: error }
-//     })
-
-//   console.log(res)
-
-//   return res
-// }
 
 export default EventPage
