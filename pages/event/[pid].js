@@ -7,6 +7,7 @@ import { CalendarToday as Calendar } from '@styled-icons/material-rounded/Calend
 import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../../utils/screen-sizes'
 import ErrorBox from '../../fragments/ErrorBox'
+import { ScrollTo } from 'react-scroll-to'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,6 +23,7 @@ const Container = styled.div`
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     width: ${props => (props.narrow ? '60%' : '80%')};
+    height: 80vh;
   }
 `
 
@@ -172,9 +174,16 @@ const EventPage = ({ res }) => {
           <EventCard>
             <Title>{res.title}</Title>
           </EventCard>
+
           <MoreInfo>
             <div>More Info</div>
-            <ArrowDown />
+            <ScrollTo smooth={true}>
+              {({ scroll }) => (
+                <ArrowDown
+                  onClick={() => scroll({ x: 20, y: 700, smooth: true })}
+                />
+              )}
+            </ScrollTo>
           </MoreInfo>
         </Container>
         <Container narrow>
