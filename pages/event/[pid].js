@@ -160,6 +160,16 @@ const InputTitle = styled.h3`
   text-align: left;
 `
 
+const CheckBoxWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const CheckBox = styled.input`
+  display: block;
+  border: 1px solid ${({ theme }) => theme.colors.blue};
+`
+
 const EventPage = ({ res }) => {
   const [visible, setVisible] = useState(false)
   const toggleVisible = () => setVisible(oldVisible => !oldVisible)
@@ -204,6 +214,15 @@ const EventPage = ({ res }) => {
             </MapBox>
           </Section>
           <RSVPForm visible={visible}>
+            <CheckBoxWrapper>
+              <CheckBox type="checkbox" id="Yes"></CheckBox>
+              <label for="Yes">Yes</label>
+              <CheckBox type="checkbox" id="No"></CheckBox>
+              <label for="No">No</label>
+              <CheckBox type="checkbox" id="Maybe"></CheckBox>
+              <label for="Maybe">Maybe</label>
+            </CheckBoxWrapper>
+
             <InputTitle>Name</InputTitle>
             <RSVPInput></RSVPInput>
             <InputTitle>Name</InputTitle>
