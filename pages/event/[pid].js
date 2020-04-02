@@ -8,6 +8,8 @@ import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../../utils/screen-sizes'
 import ErrorBox from '../../fragments/ErrorBox'
 import { ScrollTo } from 'react-scroll-to'
+import RSVPForm from '../../uiComponents/RSVPForm'
+import Button from '../../uiComponents/Button'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -56,6 +58,7 @@ const MoreInfo = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px;
+  font-size: 15px;
 `
 
 const ArrowDown = styled(Arrow)`
@@ -107,69 +110,6 @@ const Pin = styled(PinDrop)`
   color: ${props => props.theme.colors.blue};
 `
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const Button = styled.button`
-  background-color: ${props => props.theme.colors.blue};
-  color: ${props => props.theme.colors.white};
-  border-radius: 10px;
-  border: none;
-  width: 100px;
-  height: 50px;
-  transition: top 1s;
-  top: ${props => (props.visible ? '2000px' : '1500px')};
-  position: absolute;
-`
-
-const RSVPForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-  margin: 20px;
-`
-const RSVPInput = styled.input`
-  display: block;
-  margin: 10px;
-  animation-name: example;
-  animation-duration: 4s;
-  border: 1px solid ${props => props.theme.colors.blue};
-  border-radius: 10px;
-  width: 100%;
-  height: 50px;
-
-  @keyframes example {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-`
-
-const InputTitle = styled.h3`
-  color: ${props => props.theme.colors.blue};
-  margin: 0;
-  width: 100%;
-  text-align: left;
-`
-
-const CheckBoxWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-const CheckBox = styled.input`
-  display: block;
-  border: 1px solid ${({ theme }) => theme.colors.blue};
-`
-
 const EventPage = ({ res }) => {
   const [visible, setVisible] = useState(false)
   const toggleVisible = () => setVisible(oldVisible => !oldVisible)
@@ -184,7 +124,6 @@ const EventPage = ({ res }) => {
           <EventCard>
             <Title>{res.title}</Title>
           </EventCard>
-
           <MoreInfo>
             <div>More Info</div>
             <ScrollTo smooth={true}>
@@ -213,30 +152,11 @@ const EventPage = ({ res }) => {
               </InfoBox>
             </MapBox>
           </Section>
-          <RSVPForm visible={visible}>
-            <CheckBoxWrapper>
-              <CheckBox type="checkbox" id="Yes"></CheckBox>
-              <label for="Yes">Yes</label>
-              <CheckBox type="checkbox" id="No"></CheckBox>
-              <label for="No">No</label>
-              <CheckBox type="checkbox" id="Maybe"></CheckBox>
-              <label for="Maybe">Maybe</label>
-            </CheckBoxWrapper>
 
-            <InputTitle>Name</InputTitle>
-            <RSVPInput></RSVPInput>
-            <InputTitle>Name</InputTitle>
-            <RSVPInput></RSVPInput>
-            <InputTitle>Name</InputTitle>
-            <RSVPInput></RSVPInput>
-            <InputTitle>Name</InputTitle>
-            <RSVPInput></RSVPInput>
-          </RSVPForm>
-          <ButtonWrapper>
-            <Button onClick={toggleVisible} visible={visible}>
-              RSVP
-            </Button>
-          </ButtonWrapper>
+          <Button onClickFunction={toggleVisible} visible={visible}>
+            RSVP
+          </Button>
+          <RSVPForm visible={visible} />
         </Container>
       </>
     )
