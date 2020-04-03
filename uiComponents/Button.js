@@ -7,7 +7,7 @@ const ButtonWrapper = styled.div`
   margin: 40px;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.white};
   border-radius: 10px;

@@ -57,12 +57,12 @@ const MoreInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
-  font-size: 15px;
+  margin-top: 20px;
+  font-size: 20px;
 `
 
 const ArrowDown = styled(Arrow)`
-  width: 80px;
+  width: 60px;
   color: ${props => props.theme.colors.black};
 `
 
