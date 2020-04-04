@@ -14,8 +14,11 @@ import { Button } from '../../uiComponents/Button'
 const GlobalStyle = createGlobalStyle`
   body {
    background-color: ${(props) =>
-     props.error ? props.theme.colors.blue : props.theme.colors.white};
+     props.error
+       ? props.theme.colors.primary
+       : props.theme.colors.lightprimary};
    margin: 0;
+
   }
 `
 
@@ -34,7 +37,7 @@ const EventCard = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 50px;
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.primary};
   height: 700px;
   width: 100%;
   border-radius: 10px;
@@ -45,38 +48,41 @@ const EventCard = styled.div`
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    height: 400px;
-    font-size: 50px;
+    height: 550px;
   }
 `
 
-const Title = styled.div`
-  font-size: 40px;
-  color: ${(props) => props.theme.colors.white};
+const EventTitle = styled.div`
+  font-size: 50px;
+  color: ${({ theme }) => theme.colors.eventtext};
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: 15px;
+    font-size: ${({ theme }) => theme.fonts.titlephone};
   }
 `
 
 const EventCardText = styled.div`
   width: 60%;
-  color: ${(props) => props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.eventtext};
   padding: 20px 0;
+  font-size: ${({ theme }) => theme.fonts.text};
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: 10px;
+    font-size: ${({ theme }) => theme.fonts.textphone};
   }
 `
 
 const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.white};
-  color: ${(props) => props.theme.colors.black};
+  color: ${({ theme }) => theme.colors.accentprimary};
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.transwhite};
+  }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: 10px;
-    height: 20px;
-    width: 50px;
+    height: 40px;
+    width: 80px;
     border-radius: 5px;
   }
 `
@@ -95,19 +101,20 @@ const MoreInfo = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  font-size: 20px;
-  color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fonts.text};
+  color: ${({ theme }) => theme.colors.eventtext};
   bottom: 80px;
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: 10px;
+    font-size: ${({ theme }) => theme.fonts.textphone};
     bottom: 10px;
   }
 `
 
 const ArrowDown = styled(Arrow)`
   width: 60px;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.eventtext};
+  cursor: pointer;
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     width: 40px;
@@ -127,9 +134,13 @@ const Section = styled.div`
 `
 
 const InfoTitle = styled.div`
-  font-size: 30px;
-  color: ${(props) => props.theme.colors.blue};
+  font-size: ${({ theme }) => theme.fonts.title};
+  color: ${(props) => props.theme.colors.primary};
   margin-bottom: 10px;
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    font-size: ${({ theme }) => theme.fonts.titlephone};
+  }
 `
 
 const InfoBox = styled.div`
@@ -140,18 +151,18 @@ const InfoBox = styled.div`
 `
 
 const InfoText = styled.div`
-  color: ${(props) => props.theme.colors.black};
-  font-size: 20px;
+  color: ${(props) => props.theme.colors.gentext};
+  font-size: ${({ theme }) => theme.fonts.text};
   padding: 5px 20px;
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: 15px;
+    font-size: ${({ theme }) => theme.fonts.textphone};
   }
 `
 
 const Cal = styled(Calendar)`
   width: 80px;
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.icon};
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     width: 60px;
@@ -172,7 +183,7 @@ const MapBox = styled.div`
 `
 
 const Map = styled.div`
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.icon};
   width: 200px;
   height: 200px;
   border-radius: 5px;
@@ -189,7 +200,7 @@ const Map = styled.div`
 
 const Pin = styled(PinDrop)`
   width: 80px;
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.icon};
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
   }
@@ -225,7 +236,7 @@ const EventPage = ({ res }) => {
         <GlobalStyle />
         <Container>
           <EventCard>
-            <Title>{res.title}</Title>
+            <EventTitle>{res.title}</EventTitle>
             <EventCardText>
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -272,7 +283,7 @@ const EventPage = ({ res }) => {
             </MapBox>
           </Section>
           <Section>
-            <InfoTitle>Värdar</InfoTitle>
+            <InfoTitle>Hosts</InfoTitle>
             <InfoBox row>
               {res.hosts.map((name) => (
                 <InfoText>{name}</InfoText>

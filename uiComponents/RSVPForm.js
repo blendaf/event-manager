@@ -12,13 +12,13 @@ const RSVPComponent = styled.div`
   align-items: center;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   margin: 40px;
-  font-size: 20px;
 `
 const InputTitle = styled.div`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.primary};
   margin: 10px 0;
   width: 100%;
   text-align: center;
+  font-size: ${({ theme }) => theme.fonts.title};
 `
 
 const RadioButtons = styled.div`
@@ -39,7 +39,11 @@ const Label = styled.div`
   cursor: pointer;
   user-select: none;
   text-align: center;
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.gentext};
+  font-size: ${({ theme }) => theme.fonts.input};
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    font-size: ${({ theme }) => theme.fonts.inputphone};
+  }
 `
 
 const RadioButton = styled.label`
@@ -48,7 +52,7 @@ const RadioButton = styled.label`
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: ${({ theme }) => theme.fonts.input};
   user-select: none;
   text-align: center;
 
@@ -65,16 +69,18 @@ const RadioButton = styled.label`
     right: 5px;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    /* border: 2px solid ${({ theme }) => theme.colors.accentprimary}; */
+    background-color: ${({ theme }) => theme.colors.offinputbackground};
+
     border-radius: 50%;
   }
 
   :hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: ${({ theme }) => theme.colors.accentprimary};
   }
 
   input:checked ~ .checkmark {
-    background-color: ${(props) => props.theme.colors.blue};
+    background-color: ${(props) => props.theme.colors.accentprimary};
   }
 
   .checkmark:after {
@@ -114,18 +120,26 @@ const NumberOfGuestsWrapper = styled.div`
 `
 
 const NumberInput = styled.input`
-  border: 2px solid ${(props) => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   width: 50px;
   height: 50px;
   border-radius: 10px;
   margin: 0 5px;
   text-align: center;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fonts.input};
+  background-color: ${({ theme }) => theme.colors.inputbackground};
+
+  :focus {
+    outline: none;
+    border-color: ${(props) => props.theme.colors.lightprimary};
+  }
+
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     height: 40px;
   }
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     height: 40px;
+    font-size: ${({ theme }) => theme.fonts.inputphone};
   }
 `
 
@@ -134,7 +148,14 @@ const StyledButton = styled(Button)`
   height: 50px;
   padding: 5px;
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.lightblue : props.theme.colors.blue};
+    props.disabled
+      ? props.theme.colors.lightprimary
+      : props.theme.colors.primary};
+  font-size: ${({ theme }) => theme.fonts.button};
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.lightprimary};
+  }
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     width: 40px;
@@ -143,11 +164,12 @@ const StyledButton = styled(Button)`
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     width: 40px;
     height: 40px;
+    font-size: ${({ theme }) => theme.fonts.buttonphone};
   }
 `
 
 const PlusIcon = styled(PlusCircleOutline)`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.buttoncontent};
   width: 40px;
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
@@ -159,7 +181,7 @@ const PlusIcon = styled(PlusCircleOutline)`
 `
 
 const MinusIcon = styled(MinusCircleOutline)`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.buttoncontent};
   width: 40px;
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     width: 20px;
@@ -184,22 +206,51 @@ const StyledForm = styled.form`
   }
 `
 const TextInput = styled.textarea`
-  border: 2px solid ${(props) => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   border-radius: 10px;
   width: 100%;
   height: 60px;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fonts.input};
   padding: 5px;
   padding-left: 10px;
+  background-color: ${({ theme }) => theme.colors.inputbackground};
+
+  :focus {
+    outline: none;
+    border-color: ${(props) => props.theme.colors.lightprimary};
+  }
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.accentprimary};
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    font-size: ${({ theme }) => theme.fonts.inputphone};
+  }
 `
 
 const ShortTextInput = styled.input`
-  border: 2px solid ${(props) => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   border-radius: 10px;
   width: 100%;
   height: 40px;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fonts.input};
   padding-left: 10px;
+  background-color: ${({ theme }) => theme.colors.inputbackground};
+
+  :focus {
+    outline: none;
+    border-color: ${(props) => props.theme.colors.lightprimary};
+  }
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.accentprimary};
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    height: 40px;
+    font-size: ${({ theme }) => theme.fonts.inputphone};
+  }
 `
 
 export default ({ visible }) => {
@@ -207,6 +258,7 @@ export default ({ visible }) => {
 
   return (
     <RSVPComponent visible={visible}>
+      <InputTitle>Are you coming?</InputTitle>
       <RadioButtons>
         <RadioWrapper>
           <Label>Yes</Label>
@@ -246,8 +298,11 @@ export default ({ visible }) => {
       <InputSectionWrapper>
         <InputTitle>No of guests</InputTitle>
         <NumberOfGuestsWrapper>
-          <StyledButton onClick={() => setNoGuests((old) => old + 1)}>
-            <PlusIcon />
+          <StyledButton
+            disabled={noGuests < 1}
+            onClick={() => setNoGuests((old) => old - 1)}
+          >
+            <MinusIcon />
           </StyledButton>
           <form>
             <NumberInput
@@ -259,11 +314,8 @@ export default ({ visible }) => {
               onChange={() => console.log(noGuests)}
             />
           </form>
-          <StyledButton
-            disabled={noGuests < 1}
-            onClick={() => setNoGuests((old) => old - 1)}
-          >
-            <MinusIcon />
+          <StyledButton onClick={() => setNoGuests((old) => old + 1)}>
+            <PlusIcon />
           </StyledButton>
         </NumberOfGuestsWrapper>
       </InputSectionWrapper>

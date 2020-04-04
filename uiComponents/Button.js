@@ -5,21 +5,23 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.colors.blue};
-  color: ${(props) => props.theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.buttoncontent};
   border-radius: 10px;
   border: none;
   width: 200px;
   height: 50px;
-  font-size: 15px;
+  font-size: ${({ theme }) => theme.fonts.button};
+  cursor: pointer;
 
-  /* @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    width: 100px;
-    height: 50px;
+  :focus {
+    outline: none;
+  }
+  :hover {
+    background-color: ${({ theme }) => theme.colors.lightprimary};
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    width: 100px;
-    height: 50px;
-  } */
+    font-size: ${({ theme }) => theme.fonts.buttonphone};
+  }
 `
