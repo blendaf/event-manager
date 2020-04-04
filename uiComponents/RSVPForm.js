@@ -1,75 +1,38 @@
 import styled from 'styled-components'
 import { PlusCircleOutline } from '@styled-icons/evaicons-outline/PlusCircleOutline'
+import { MinusCircleOutline } from '@styled-icons/evaicons-outline/MinusCircleOutline'
 import { Button } from './Button'
 import { useState } from 'react'
+import screenSizes from '../utils/screen-sizes'
 
 const RSVPComponent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   margin: 40px;
   font-size: 20px;
 `
-
-const InputWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 15px;
-`
-
-const RSVPInput = styled.input`
-  animation-name: example;
-  animation-duration: 4s;
-  border: 1px solid ${props => props.theme.colors.blue};
-  border-radius: 10px;
-
-  height: 50px;
-  font-size: 20px;
-  color: ${props => props.theme.colors.blue};
-  padding-left: 5px;
-
-  @keyframes example {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  ::placeholder {
-    color: ${props => props.theme.colors.lightblue};
-  }
-`
-
 const InputTitle = styled.div`
-  color: ${props => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.blue};
   margin: 10px 0;
   width: 100%;
   text-align: center;
 `
 
-const CheckBoxes = styled.div`
+const RadioButtons = styled.div`
   display: flex;
   flex-direction: row;
   margin: 20px;
 `
-const CheckBoxWrapper = styled.div`
+const RadioWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 5px;
-  width: 80px;
-`
-
-const CheckBox = styled.input`
-  border: 1px solid ${({ theme }) => theme.colors.blue};
+  width: 60px;
 `
 
 const Label = styled.div`
@@ -77,6 +40,61 @@ const Label = styled.div`
   user-select: none;
   text-align: center;
   color: ${({ theme }) => theme.colors.blue};
+`
+
+const RadioButton = styled.label`
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+  text-align: center;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    right: 5px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+
+  :hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: ${(props) => props.theme.colors.blue};
+  }
+
+  .checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
 `
 
 const InputSectionWrapper = styled.div`
@@ -96,26 +114,59 @@ const NumberOfGuestsWrapper = styled.div`
 `
 
 const NumberInput = styled.input`
-  border: 1px solid ${props => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.blue};
   width: 50px;
-  height: 40px;
+  height: 50px;
   border-radius: 10px;
   margin: 0 5px;
   text-align: center;
   font-size: 20px;
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    height: 40px;
+  }
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    height: 40px;
+  }
 `
 
 const StyledButton = styled(Button)`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   padding: 5px;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.disabled ? props.theme.colors.lightblue : props.theme.colors.blue};
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 40px;
+    height: 40px;
+  }
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    width: 40px;
+    height: 40px;
+  }
 `
 
 const PlusIcon = styled(PlusCircleOutline)`
   color: ${({ theme }) => theme.colors.white};
-  width: 20px;
+  width: 40px;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 20px;
+  }
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    width: 20px;
+  }
+`
+
+const MinusIcon = styled(MinusCircleOutline)`
+  color: ${({ theme }) => theme.colors.white};
+  width: 40px;
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 20px;
+  }
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    width: 20px;
+  }
 `
 
 const StyledForm = styled.form`
@@ -123,21 +174,32 @@ const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    width: 100%;
+  }
 `
 const TextInput = styled.textarea`
-  border: 1px solid ${props => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.blue};
   border-radius: 10px;
   width: 100%;
   height: 60px;
   font-size: 20px;
+  padding: 5px;
+  padding-left: 10px;
 `
 
 const ShortTextInput = styled.input`
-  border: 1px solid ${props => props.theme.colors.blue};
+  border: 2px solid ${(props) => props.theme.colors.blue};
   border-radius: 10px;
   width: 100%;
   height: 40px;
   font-size: 20px;
+  padding-left: 10px;
 `
 
 export default ({ visible }) => {
@@ -145,25 +207,46 @@ export default ({ visible }) => {
 
   return (
     <RSVPComponent visible={visible}>
-      <CheckBoxes>
-        <CheckBoxWrapper>
+      <RadioButtons>
+        <RadioWrapper>
           <Label>Yes</Label>
-          <CheckBox type="radio" id="Yes" name="rsvp" />
-        </CheckBoxWrapper>
-        <CheckBoxWrapper>
+          <RadioButton>
+            <input
+              type="radio"
+              name="radio"
+              onChange={console.log('onChange')}
+            />
+            <span className="checkmark"></span>
+          </RadioButton>
+        </RadioWrapper>
+        <RadioWrapper>
           <Label>No</Label>
-          <CheckBox type="radio" id="No" name="rsvp" />
-        </CheckBoxWrapper>
-        <CheckBoxWrapper>
+          <RadioButton>
+            <input
+              type="radio"
+              name="radio"
+              onChange={console.log('onChange')}
+            />
+            <span className="checkmark"></span>
+          </RadioButton>
+        </RadioWrapper>
+        <RadioWrapper>
           <Label>Maybe</Label>
-          <CheckBox type="radio" id="Maybe" name="rsvp" />
-        </CheckBoxWrapper>
-      </CheckBoxes>
+          <RadioButton>
+            <input
+              type="radio"
+              name="radio"
+              onChange={console.log('onChange')}
+            />
+            <span className="checkmark"></span>
+          </RadioButton>
+        </RadioWrapper>
+      </RadioButtons>
 
       <InputSectionWrapper>
         <InputTitle>No of guests</InputTitle>
         <NumberOfGuestsWrapper>
-          <StyledButton onClick={() => setNoGuests(old => old + 1)}>
+          <StyledButton onClick={() => setNoGuests((old) => old + 1)}>
             <PlusIcon />
           </StyledButton>
           <form>
@@ -173,13 +256,14 @@ export default ({ visible }) => {
               name="no-guests"
               id="no-guests"
               value={noGuests}
+              onChange={() => console.log(noGuests)}
             />
           </form>
           <StyledButton
             disabled={noGuests < 1}
-            onClick={() => setNoGuests(old => old - 1)}
+            onClick={() => setNoGuests((old) => old - 1)}
           >
-            <PlusIcon />
+            <MinusIcon />
           </StyledButton>
         </NumberOfGuestsWrapper>
       </InputSectionWrapper>
@@ -187,13 +271,31 @@ export default ({ visible }) => {
       <InputSectionWrapper>
         <InputTitle>Names of guests</InputTitle>
         <StyledForm>
-          <TextInput placeholder="Jane Doe, Johnny Appleseed,..." type="text" />
+          <TextInput
+            placeholder="Jane Doe, Johnny Appleseed,..."
+            type="text"
+            onChange={console.log('onChange')}
+          />
         </StyledForm>
       </InputSectionWrapper>
       <InputSectionWrapper>
         <InputTitle>Allergies</InputTitle>
         <StyledForm>
-          <ShortTextInput placeholder="Gluten, dairy..." type="text" />
+          <ShortTextInput
+            placeholder="Gluten, dairy..."
+            type="text"
+            onChange={console.log('onChange')}
+          />
+        </StyledForm>
+      </InputSectionWrapper>
+      <InputSectionWrapper>
+        <InputTitle>Other information</InputTitle>
+        <StyledForm>
+          <TextInput
+            placeholder="..."
+            type="text"
+            onChange={console.log('onChange')}
+          />
         </StyledForm>
       </InputSectionWrapper>
 

@@ -7,8 +7,9 @@ import { db } from '../utils/firebaseConfig'
 
 const GlobalStyle = createGlobalStyle`
   body {
-   background-color: ${props => props.theme.colors.blue};
+   background-color: ${(props) => props.theme.colors.blue};
    margin: 0;
+   font-family: apercu-pro, "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   }
 `
 
@@ -72,7 +73,7 @@ const Button = styled.button`
   }
 `
 
-const Index = props => {
+const Index = (props) => {
   const [inputValue, setInputValue] = useState('')
   const [data, setData] = useState({})
 
@@ -84,7 +85,7 @@ const Index = props => {
             <IDInput
               placeholder="Enter event id"
               value={inputValue}
-              onChange={event => setInputValue(event.target.value)}
+              onChange={(event) => setInputValue(event.target.value)}
             ></IDInput>
           </ID>
           <Link href="event/[pid]" as={`event/${inputValue}`}>

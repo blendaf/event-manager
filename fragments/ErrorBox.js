@@ -6,10 +6,10 @@ const ErrorBox = styled.div`
   margin-top: 20px;
   max-width: 500px;
   padding: 30px 20px;
-  border: solid 1px ${({ theme }) => theme.colors.danger};
-  background: ${({ theme }) => theme.colors.dangerMuted};
+  border: solid 1px ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.blue};
   border-radius: 10px;
-  color: ${({ theme }) => theme.colors.danger};
+  color: ${({ theme }) => theme.colors.white};
 
   h1 {
     margin-top: 0;
