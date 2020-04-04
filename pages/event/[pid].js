@@ -184,8 +184,8 @@ const MapBox = styled.div`
 
 const Map = styled.div`
   background-color: ${({ theme }) => theme.colors.icon};
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 5px;
   margin-right: 80px;
 
@@ -266,19 +266,22 @@ const EventPage = ({ res }) => {
           </EventCard>
         </Container>
         <Container>
-          <Section>
+          {/* <Section>
             <InfoBox>
               <Cal />
               <InfoText>{res.date}</InfoText>
               <InfoText>{res.time}</InfoText>
             </InfoBox>
-          </Section>
+          </Section> */}
           <Section>
             <MapBox>
               <Map />
               <InfoBox>
                 <Pin />
                 <InfoText>{res.address}</InfoText>
+                <Cal />
+                <InfoText>{res.date}</InfoText>
+                <InfoText>{res.time}</InfoText>
               </InfoBox>
             </MapBox>
           </Section>
