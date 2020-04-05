@@ -7,7 +7,6 @@ import ErrorBox from '../../fragments/ErrorBox'
 import RSVPFormContainer from '../../containerComponents/RSVPFormContainer'
 import EventCard from '../../uiComponents/EventCard'
 import EventInfo from '../../uiComponents/EventInfo'
-import { Button } from '../../uiComponents/Button'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,19 +19,20 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
   width: ${(props) => (props.narrow ? '40%' : '80%')};
   margin: 0 auto;
 
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: ${(props) => (props.narrow ? '60%' : '80%')};
+    flex-direction: column;
+  }
+
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     width: ${(props) => (props.narrow ? '60%' : '80%')};
+    flex-direction: column;
   }
-`
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 40px;
 `
 
 const EventPage = ({ res }) => {
@@ -59,16 +59,11 @@ const EventPage = ({ res }) => {
             RSVPRef={RSVPRef}
           />
           <EventInfo res={res} />
-          <ButtonWrapper>
-            <Button onClick={toggleVisible} visible={visible}>
-              RSVP
-            </Button>
-          </ButtonWrapper>
-
-          <div ref={RSVPRef}>
-            <RSVPFormContainer visible={visible} />
-          </div>
         </Container>
+
+        <div ref={RSVPRef}>
+          <RSVPFormContainer visible={visible} />
+        </div>
       </>
     )
   }

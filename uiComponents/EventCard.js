@@ -6,22 +6,22 @@ import { Button } from './Button'
 
 const EventCard = styled.div`
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 50px;
   background-color: ${({ theme }) => theme.colors.primary};
   height: 700px;
-  width: 100%;
   border-radius: 10px;
-  position: relative;
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    margin-right: 20px;
+    height: 700px;
+    flex: 0 1 auto;
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    height: 550px;
+    height: 700px;
   }
 `
 
@@ -42,37 +42,6 @@ const EventCard__Text = styled.div`
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
     font-size: ${({ theme }) => theme.fonts.textphone};
-  }
-`
-
-const EventCard__MoreInfo = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  font-size: ${({ theme }) => theme.fonts.text};
-  color: ${({ theme }) => theme.colors.eventtext};
-  bottom: 80px;
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: ${({ theme }) => theme.fonts.textphone};
-    bottom: 10px;
-  }
-`
-
-const ArrowDown = styled(Arrow)`
-  width: 60px;
-  color: ${(props) => props.theme.colors.eventtext};
-  cursor: pointer;
-
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    width: 40px;
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    width: 40px;
   }
 `
 
@@ -117,11 +86,6 @@ export default ({ res, toggleVisible, visible, RSVPRef }) => {
           </StyledButton>
         )}
       </ScrollTo>
-
-      <EventCard__MoreInfo>
-        <div>More Info</div>
-        <ArrowDown onClick={() => scroll({ top: 750, behavior: 'smooth' })} />
-      </EventCard__MoreInfo>
     </EventCard>
   )
 }

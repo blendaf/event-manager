@@ -4,12 +4,72 @@ import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../utils/screen-sizes'
 import dynamic from 'next/dynamic'
 
-const Section = styled.div`
-  margin: 100px 0;
+const EventInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin-top: 50px;
+  height: 700px;
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    height: 700px;
+    flex: 0 1 auto;
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    flex: 0 1 auto;
+    height: 700px;
+  }
+`
+
+const MainInfo__wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    flex-direction: row;
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    flex-direction: column;
+  }
+`
+
+const MapContainer = styled.div``
+
+const MainInfo = styled.div`
+  display: flex;
+  flex-direction: ${(props) => (props.row ? 'row' : 'column')};
+  justify-content: flex-start;
+  align-items: center;
+  margin: ${(props) => (props.row ? '60px 0' : '0')};
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    flex-direction: column;
+    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    flex-direction: column;
+    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
+  }
+`
+
+const MainInfo__box = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.row ? 'row' : 'column')};
   justify-content: center;
   align-items: center;
+`
+
+const MainInfo__text = styled.div`
+  color: ${(props) => props.theme.colors.gentext};
+  font-size: ${({ theme }) => theme.fonts.text};
+  padding: 5px 20px;
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    font-size: ${({ theme }) => theme.fonts.textphone};
+  }
 `
 
 const InfoTitle = styled.div`
@@ -22,31 +82,6 @@ const InfoTitle = styled.div`
   }
 `
 
-const InfoBox = styled.div`
-  display: flex;
-  flex-direction: ${(props) => (props.row ? 'row' : 'column')};
-  justify-content: center;
-  align-items: center;
-`
-
-const InfoBox__contentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-`
-
-const InfoBox__text = styled.div`
-  color: ${(props) => props.theme.colors.gentext};
-  font-size: ${({ theme }) => theme.fonts.text};
-  padding: 5px 20px;
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    font-size: ${({ theme }) => theme.fonts.textphone};
-  }
-`
-
 const Cal = styled(Calendar)`
   width: 80px;
   color: ${(props) => props.theme.colors.icon};
@@ -55,8 +90,6 @@ const Cal = styled(Calendar)`
     width: 60px;
   }
 `
-
-const MapContainer = styled.div``
 
 const Pin = styled(PinDrop)`
   width: 80px;
@@ -81,30 +114,33 @@ const DynamicComponentWithNoSSR = dynamic(
 export default ({ res }) => {
   return (
     <>
-      <Section row>
-        <MapContainer>
-          <DynamicComponentWithNoSSR res={res} />
-        </MapContainer>
-        <InfoBox>
-          <InfoBox__contentContainer>
-            <Pin />
-            <InfoBox__text>{res.address}</InfoBox__text>
-          </InfoBox__contentContainer>
-          <InfoBox__contentContainer>
-            <Cal />
-            <InfoBox__text>{res.date}</InfoBox__text>
-            <InfoBox__text>{res.time}</InfoBox__text>
-          </InfoBox__contentContainer>
-        </InfoBox>
-      </Section>
-      <Section>
-        <InfoTitle>Hosts</InfoTitle>
-        <InfoBox row>
-          {res.hosts.map((name) => (
-            <InfoBox__text>{name}</InfoBox__text>
-          ))}
-        </InfoBox>
-      </Section>
+      <EventInfo>
+        <MainInfo__wrapper>
+          <MapContainer>
+            <DynamicComponentWithNoSSR res={res} />
+          </MapContainer>
+          <MainInfo row>
+            <MainInfo__box>
+              <Pin />
+              <MainInfo__text>{res.address}</MainInfo__text>
+            </MainInfo__box>
+            <MainInfo__box>
+              <Cal />
+              <MainInfo__text>{res.date}</MainInfo__text>
+              <MainInfo__text>{res.time}</MainInfo__text>
+            </MainInfo__box>
+          </MainInfo>
+        </MainInfo__wrapper>
+
+        <MainInfo>
+          <InfoTitle>Hosts</InfoTitle>
+          <MainInfo__box row>
+            {res.hosts.map((name) => (
+              <MainInfo__text>{name}</MainInfo__text>
+            ))}
+          </MainInfo__box>
+        </MainInfo>
+      </EventInfo>
     </>
   )
 }

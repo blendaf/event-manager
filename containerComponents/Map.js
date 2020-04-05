@@ -12,8 +12,8 @@ const Markers = ({ res }) => {
 const Map = ({ res }) => {
   const [mapState, setMapState] = useState({
     viewport: {
-      width: '400px',
-      height: '400px',
+      width: '300px',
+      height: '300px',
       latitude: res.coordinates[0],
       longitude: res.coordinates[1],
       zoom: 13,
