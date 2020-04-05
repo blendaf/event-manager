@@ -12,10 +12,9 @@ import { Button } from '../../uiComponents/Button'
 const GlobalStyle = createGlobalStyle`
   body {
    background-color: ${(props) =>
-     props.error
-       ? props.theme.colors.primary
-       : props.theme.colors.lightprimary};
+     props.error ? props.theme.colors.primary : props.theme.colors.background};
    margin: 0;
+   font-family: apercu-pro, "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 
   }
 `

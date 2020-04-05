@@ -68,14 +68,13 @@ const RadioButton = styled.label`
     right: 5px;
     height: 25px;
     width: 25px;
-    /* border: 2px solid ${({ theme }) => theme.colors.accentprimary}; */
     background-color: ${({ theme }) => theme.colors.offinputbackground};
 
     border-radius: 50%;
   }
 
   :hover input ~ .checkmark {
-    background-color: ${({ theme }) => theme.colors.accentsecondary};
+    background-color: ${({ theme }) => theme.colors.buttonhover};
   }
 
   input:checked ~ .checkmark {
