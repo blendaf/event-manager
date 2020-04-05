@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { db } from '../utils/firebaseConfig'
+import { Button } from '../uiComponents/Button'
+import screenSizes from '../utils/screen-sizes'
+import Head from 'next/head'
 
 const GlobalStyle = createGlobalStyle`
   body {
-   background-color: ${(props) => props.theme.colors.blue};
+   background-color: ${(props) => props.theme.colors.primary};
    margin: 0;
    font-family: apercu-pro, "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   }
@@ -38,13 +39,13 @@ const IDInput = styled.input`
   border: solid 3px ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.blue};
   text-align: center;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.gentext};
   width: 400px;
   height: 50px;
   font-size: 20px;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.gentext};
     opacity: 1;
   }
 
@@ -55,21 +56,18 @@ const IDInput = styled.input`
     box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
   }
 `
-const Button = styled.button`
-  background-color: ${({ theme }) => theme.colors.white};
-  margin: 10px;
-  color: ${({ theme }) => theme.colors.blue};
-  border-radius: 5px;
-  border: none;
-  width: 200px;
-  height: 40px;
-  font-size: 20px;
+const StyledButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.accentprimary};
 
-  &:focus {
-    outline: none;
-    -webkit-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
-    -moz-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
-    box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
+  :hover {
+    background-color: ${(props) => props.theme.colors.transwhite};
+  }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    height: 40px;
+    width: 80px;
+    border-radius: 5px;
   }
 `
 
@@ -79,6 +77,14 @@ const Index = (props) => {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>Event manager</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+          href="https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css"
+          rel="stylesheet"
+        />
+      </Head>
       <Container>
         <CenterWrapper>
           <ID>
@@ -89,7 +95,7 @@ const Index = (props) => {
             ></IDInput>
           </ID>
           <Link href="event/[pid]" as={`event/${inputValue}`}>
-            <Button>Go to Event</Button>
+            <StyledButton>Go to Event</StyledButton>
           </Link>
         </CenterWrapper>
       </Container>

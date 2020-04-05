@@ -18,7 +18,8 @@ export const Button = styled.button`
     outline: none;
   }
   :hover {
-    background-color: ${({ theme }) => theme.colors.lightprimary};
+    background-color: ${({ theme }) => theme.colors.buttonhover};
+    color: ${({ theme }) => theme.colors.buttoncontent};
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {

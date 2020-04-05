@@ -14,7 +14,7 @@ const RSVPComponent = styled.div`
   margin: 40px;
 `
 const InputTitle = styled.div`
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.inputtitle};
   margin: 10px 0;
   width: 100%;
   text-align: center;
@@ -76,7 +76,7 @@ const RadioButton = styled.label`
   }
 
   :hover input ~ .checkmark {
-    background-color: ${({ theme }) => theme.colors.accentprimary};
+    background-color: ${({ theme }) => theme.colors.accentsecondary};
   }
 
   input:checked ~ .checkmark {
@@ -131,7 +131,7 @@ const NumberInput = styled.input`
 
   :focus {
     outline: none;
-    border-color: ${(props) => props.theme.colors.lightprimary};
+    border-color: ${(props) => props.theme.colors.focus};
   }
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
@@ -147,14 +147,12 @@ const StyledButton = styled(Button)`
   width: 50px;
   height: 50px;
   padding: 5px;
-  background-color: ${(props) =>
-    props.disabled
-      ? props.theme.colors.lightprimary
-      : props.theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
   font-size: ${({ theme }) => theme.fonts.button};
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.lightprimary};
+    background-color: ${({ theme }) => theme.colors.buttonhover};
   }
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
@@ -217,11 +215,11 @@ const TextInput = styled.textarea`
 
   :focus {
     outline: none;
-    border-color: ${(props) => props.theme.colors.lightprimary};
+    border-color: ${(props) => props.theme.colors.focus};
   }
 
   ::placeholder {
-    color: ${({ theme }) => theme.colors.accentprimary};
+    color: ${({ theme }) => theme.colors.inputplaceholder};
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
@@ -240,11 +238,11 @@ const ShortTextInput = styled.input`
 
   :focus {
     outline: none;
-    border-color: ${(props) => props.theme.colors.lightprimary};
+    border-color: ${(props) => props.theme.colors.focus};
   }
 
   ::placeholder {
-    color: ${({ theme }) => theme.colors.accentprimary};
+    color: ${({ theme }) => theme.colors.inputplaceholder};
   }
 
   @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
