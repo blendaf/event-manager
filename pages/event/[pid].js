@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components'
 import { db } from '../../utils/firebaseConfig'
 import screenSizes from '../../utils/screen-sizes'
 import ErrorBox from '../../fragments/ErrorBox'
-import RSVPForm from '../../uiComponents/RSVPForm'
+import RSVPFormContainer from '../../containerComponents/RSVPFormContainer'
 import EventCard from '../../uiComponents/EventCard'
 import EventInfo from '../../uiComponents/EventInfo'
 import { Button } from '../../uiComponents/Button'
@@ -34,19 +34,6 @@ const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 40px;
-`
-
-const SidebarStyle = styled.div`
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 12px;
-  background-color: #404040;
-  color: #ffffff;
-  z-index: 1 !important;
-  padding: 6px;
-  font-weight: bold;
 `
 
 const EventPage = ({ res }) => {
@@ -80,7 +67,7 @@ const EventPage = ({ res }) => {
           </ButtonWrapper>
 
           <div ref={RSVPRef}>
-            <RSVPForm visible={visible} />
+            <RSVPFormContainer visible={visible} />
           </div>
         </Container>
       </>

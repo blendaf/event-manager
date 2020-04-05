@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { PlusCircleOutline } from '@styled-icons/evaicons-outline/PlusCircleOutline'
 import { MinusCircleOutline } from '@styled-icons/evaicons-outline/MinusCircleOutline'
 import { Button } from './Button'
-import { useState } from 'react'
 import screenSizes from '../utils/screen-sizes'
 
 const RSVPComponent = styled.div`
@@ -251,9 +250,7 @@ const ShortTextInput = styled.input`
   }
 `
 
-export default ({ visible }) => {
-  const [noGuests, setNoGuests] = useState(1)
-
+export default ({ visible, noGuests, setNoGuests }) => {
   return (
     <RSVPComponent visible={visible}>
       <InputTitle>Are you coming?</InputTitle>
@@ -261,33 +258,21 @@ export default ({ visible }) => {
         <RadioWrapper>
           <Label>Yes</Label>
           <RadioButton>
-            <input
-              type="radio"
-              name="radio"
-              onChange={console.log('onChange')}
-            />
+            <input type="radio" name="radio" />
             <span className="checkmark"></span>
           </RadioButton>
         </RadioWrapper>
         <RadioWrapper>
           <Label>No</Label>
           <RadioButton>
-            <input
-              type="radio"
-              name="radio"
-              onChange={console.log('onChange')}
-            />
+            <input type="radio" name="radio" />
             <span className="checkmark"></span>
           </RadioButton>
         </RadioWrapper>
         <RadioWrapper>
           <Label>Maybe</Label>
           <RadioButton>
-            <input
-              type="radio"
-              name="radio"
-              onChange={console.log('onChange')}
-            />
+            <input type="radio" name="radio" />
             <span className="checkmark"></span>
           </RadioButton>
         </RadioWrapper>
@@ -321,31 +306,19 @@ export default ({ visible }) => {
       <InputSectionWrapper>
         <InputTitle>Names of guests</InputTitle>
         <StyledForm>
-          <TextInput
-            placeholder="Jane Doe, Johnny Appleseed,..."
-            type="text"
-            onChange={console.log('onChange')}
-          />
+          <TextInput placeholder="Jane Doe, Johnny Appleseed,..." type="text" />
         </StyledForm>
       </InputSectionWrapper>
       <InputSectionWrapper>
         <InputTitle>Allergies</InputTitle>
         <StyledForm>
-          <ShortTextInput
-            placeholder="Gluten, dairy..."
-            type="text"
-            onChange={console.log('onChange')}
-          />
+          <ShortTextInput placeholder="Gluten, dairy..." type="text" />
         </StyledForm>
       </InputSectionWrapper>
       <InputSectionWrapper>
         <InputTitle>Other information</InputTitle>
         <StyledForm>
-          <TextInput
-            placeholder="..."
-            type="text"
-            onChange={console.log('onChange')}
-          />
+          <TextInput placeholder="..." type="text" />
         </StyledForm>
       </InputSectionWrapper>
 

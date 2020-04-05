@@ -39,13 +39,13 @@ const IDInput = styled.input`
   border: solid 3px ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.blue};
   text-align: center;
-  color: ${({ theme }) => theme.colors.gentext};
+  color: ${({ theme }) => theme.colors.black};
   width: 400px;
   height: 50px;
   font-size: 20px;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.gentext};
+    color: ${({ theme }) => theme.colors.accentprimary};
     opacity: 1;
   }
 

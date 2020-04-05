@@ -7,6 +7,7 @@ A Event/Party Manager app that is developed as a fun private project. The app is
 - SSR
 - Password/id protection
 - Dynamic routing
+- Map using Mapbox API
 
 # Planned Features
 
@@ -17,3 +18,5 @@ A Event/Party Manager app that is developed as a fun private project. The app is
   - Create event
   - Edit event
   - Share event
+- Save data
+  - Address to coordinates

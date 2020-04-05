@@ -15,6 +15,7 @@ const theme = {
     lightprimary: '#a0d7ff',
     icon: '#ff8963',
     eventbuttonhover: '#ffe06a',
+    eventbuttoncontent: '#000',
     inputtitle: '#fff',
     inputbackground: '#a0d7ff',
     inputplaceholder: '#fff',

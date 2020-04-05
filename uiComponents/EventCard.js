@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import React, { useState, useRef, useEffect } from 'react'
 import screenSizes from '../utils/screen-sizes'
 import { ScrollTo } from 'react-scroll-to'
 import { ArrowDropDown as Arrow } from '@styled-icons/material-outlined/ArrowDropDown'
@@ -79,7 +78,7 @@ const ArrowDown = styled(Arrow)`
 
 const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.white};
-  color: ${({ theme }) => theme.colors.accentprimary};
+  color: ${({ theme }) => theme.colors.eventbuttoncontent};
 
   :hover {
     background-color: ${(props) => props.theme.colors.eventbuttonhover};

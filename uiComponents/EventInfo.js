@@ -1,9 +1,7 @@
 import styled from 'styled-components'
-import React, { useState, useRef, useEffect } from 'react'
 import { CalendarToday as Calendar } from '@styled-icons/material-rounded/CalendarToday'
 import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../utils/screen-sizes'
-import { Button } from './Button'
 import dynamic from 'next/dynamic'
 
 const Section = styled.div`
@@ -73,16 +71,19 @@ const Pin = styled(PinDrop)`
   }
 `
 
-const DynamicComponentWithNoSSR = dynamic(() => import('../components/Map'), {
-  ssr: false,
-})
+const DynamicComponentWithNoSSR = dynamic(
+  () => import('../containerComponents/Map'),
+  {
+    ssr: false,
+  }
+)
 
 export default ({ res }) => {
   return (
     <>
       <Section row>
         <MapContainer>
-          <DynamicComponentWithNoSSR />
+          <DynamicComponentWithNoSSR res={res} />
         </MapContainer>
         <InfoBox>
           <InfoBox__contentContainer>
