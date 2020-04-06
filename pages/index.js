@@ -55,6 +55,10 @@ const IDInput = styled.input`
     -moz-box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
     box-shadow: 0px 0px 26px 0px ${({ theme }) => theme.colors.white};
   }
+
+  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+    width: 300px;
+  }
 `
 const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.white};

@@ -12,14 +12,13 @@ const Markers = ({ res }) => {
 const Map = ({ res }) => {
   const [mapState, setMapState] = useState({
     viewport: {
-      width: '300px',
+      width: '15vw',
       height: '300px',
       latitude: res.coordinates[0],
       longitude: res.coordinates[1],
       zoom: 13,
     },
   })
-
   return (
     <ReactMapGL
       mapStyle="mapbox://styles/mapbox/streets-v9"

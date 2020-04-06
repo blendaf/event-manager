@@ -6,16 +6,14 @@ import { Button } from './Button'
 
 const EventCard = styled.div`
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   /* justify-content: center; */
-  justify-content: flex-end;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   /* margin-top: 50px; */
   background-color: ${({ theme }) => theme.colors.primary};
-  height: 700px;
-  height: 100vh;
-  /* border-radius: 10px; */
+  height: 500px;
+  width: 1000px;
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     height: 700px;
@@ -72,7 +70,7 @@ export default ({ res, toggleVisible, visible, RSVPRef }) => {
 
   return (
     <EventCard>
-      <EventCard__Title>{res.title}</EventCard__Title>
+      {/* <EventCard__Title>{res.title}</EventCard__Title>
       <EventCard__Text>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -81,14 +79,14 @@ export default ({ res, toggleVisible, visible, RSVPRef }) => {
         velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum."
-      </EventCard__Text>
-      <ScrollTo smooth={true}>
+      </EventCard__Text> */}
+      {/* <ScrollTo smooth={true}>
         {({ scroll }) => (
           <StyledButton onClick={() => goToRSVP(scroll)} visible={visible}>
             RSVP
           </StyledButton>
         )}
-      </ScrollTo>
+      </ScrollTo> */}
     </EventCard>
   )
 }
