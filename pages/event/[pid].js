@@ -21,7 +21,8 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: ${(props) => (props.narrow ? '40%' : '80%')};
+  /* width: ${(props) => (props.narrow ? '40%' : '80%')}; */
+  width: 100%;
   margin: 0 auto;
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {

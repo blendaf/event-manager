@@ -7,13 +7,15 @@ import { Button } from './Button'
 const EventCard = styled.div`
   display: flex;
   flex: 1;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   background-color: ${({ theme }) => theme.colors.primary};
   height: 700px;
-  border-radius: 10px;
+  height: 100vh;
+  /* border-radius: 10px; */
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
     height: 700px;
@@ -48,6 +50,7 @@ const EventCard__Text = styled.div`
 const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.white};
   color: ${({ theme }) => theme.colors.eventbuttoncontent};
+  margin-bottom: 80px;
 
   :hover {
     background-color: ${(props) => props.theme.colors.eventbuttonhover};
