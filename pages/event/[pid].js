@@ -5,16 +5,9 @@ import { db } from '../../utils/firebaseConfig'
 import screenSizes from '../../utils/screen-sizes'
 import ErrorBox from '../../fragments/ErrorBox'
 import RSVPFormContainer from '../../containerComponents/RSVPFormContainer'
-// import EventCard from '../../uiComponents/EventCard'
-// import EventInfo from '../../uiComponents/EventInfo'
-import dynamic from 'next/dynamic'
-
-const DynamicComponentWithNoSSR = dynamic(
-  () => import('../../containerComponents/Map'),
-  {
-    ssr: false,
-  }
-)
+import EventCard from '../../uiComponents/EventCard'
+import EventInfo from '../../uiComponents/EventInfo'
+import MapContainer from '../../uiComponents/MapContainer'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -59,120 +52,9 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 800px) {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
-  }
-`
-
-const EventCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.primary};
-  height: 500px;
-  width: 1000px;
-  position: relative;
-
-  @media only screen and (max-width: 1100px) {
-    width: 90%;
-  }
-
-  @media only screen and (max-width: 800px) {
-    width: 350px;
-    position: static;
-  }
-
-  @media only screen and (max-width: 414px) {
-    width: 200px;
-  }
-
-  @media only screen and (max-width: 375px) {
-    width: 150px;
-  }
-
-  @media only screen and (max-width: 320px) {
-    width: 150px;
-  }
-`
-
-const EventInfo = styled.div`
-  height: 600px;
-  width: 200px;
-  background-color: ${({ theme }) => theme.colors.black};
-  position: absolute;
-  bottom: 150px;
-  right: 50px;
-  z-index: 1;
-
-  @media only screen and (max-width: 800px) {
-    width: 350px;
-    position: static;
-  }
-
-  @media only screen and (max-width: 414px) {
-    width: 200px;
-  }
-
-  @media only screen and (max-width: 375px) {
-    width: 150px;
-  }
-
-  @media only screen and (max-width: 320px) {
-    width: 150px;
-  }
-`
-
-const MapContainer = styled.div`
-  position: absolute;
-  top: 20%;
-  left: 18%;
-  z-index: 1;
-  > div {
-    width: 300px !important;
-    height: 300px !important;
-  }
-
-  @media only screen and (max-width: 1200px) {
-    left: 5%;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    left: 2%;
-    > div {
-      width: 250px !important;
-      height: 250px !important;
-    }
-  }
-
-  @media only screen and (max-width: 800px) {
-    position: static;
-    top: 0;
-    left: 0;
-    margin-top: 50px;
-    > div {
-      width: 350px !important;
-      height: 350px !important;
-    }
-  }
-
-  @media only screen and (max-width: 414px) {
-    > div {
-      width: 200px !important;
-      height: 200px !important;
-    }
-  }
-
-  @media only screen and (max-width: 375px) {
-    > div {
-      width: 150px !important;
-      height: 150px !important;
-    }
-  }
-
-  @media only screen and (max-width: 320px) {
-    > div {
-      width: 150px !important;
-      height: 150px !important;
-    }
+    flex: 1;
   }
 `
 
@@ -194,10 +76,8 @@ const EventPage = ({ res }) => {
         <GlobalStyle />
         <Container>
           <Wrapper>
-            <EventInfo />
-            <MapContainer>
-              <DynamicComponentWithNoSSR res={res} />
-            </MapContainer>
+            <EventInfo res={res} />
+            <MapContainer res={res} />
           </Wrapper>
           <EventCard
             res={res}

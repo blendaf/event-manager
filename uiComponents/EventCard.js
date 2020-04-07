@@ -6,42 +6,67 @@ import { Button } from './Button'
 
 const EventCard = styled.div`
   display: flex;
-  /* flex: 1; */
-  /* justify-content: center; */
-  /* align-items: center; */
   flex-direction: column;
-  /* margin-top: 50px; */
+  justify-content: space-evenly;
+  align-items: center;
+
   background-color: ${({ theme }) => theme.colors.primary};
-  height: 500px;
+
   width: 1000px;
 
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    height: 700px;
-    flex: 0 1 auto;
+  position: relative;
+
+  @media only screen and (max-width: 1100px) {
+    width: 90%;
   }
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    height: 700px;
+  @media only screen and (max-width: 800px) {
+    position: static;
+    flex: 1;
+  }
+
+  @media only screen and (max-width: 414px) {
+  }
+
+  @media only screen and (max-width: 375px) {
+  }
+
+  @media only screen and (max-width: 320px) {
   }
 `
 
 const EventCard__Title = styled.div`
   font-size: 50px;
   color: ${({ theme }) => theme.colors.eventtext};
+  margin-top: 80px;
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 320px) {
     font-size: ${({ theme }) => theme.fonts.titlephone};
+    padding: 0;
   }
 `
 
 const EventCard__Text = styled.div`
-  width: 60%;
   color: ${({ theme }) => theme.colors.eventtext};
-  padding: 20px 0;
   font-size: ${({ theme }) => theme.fonts.text};
+  width: 400px;
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 1100px) {
+  }
+
+  @media only screen and (max-width: 800px) {
     font-size: ${({ theme }) => theme.fonts.textphone};
+    width: auto;
+    padding: 0 20px;
+  }
+
+  @media only screen and (max-width: 414px) {
+  }
+
+  @media only screen and (max-width: 375px) {
+  }
+
+  @media only screen and (max-width: 320px) {
   }
 `
 
@@ -70,7 +95,7 @@ export default ({ res, toggleVisible, visible, RSVPRef }) => {
 
   return (
     <EventCard>
-      {/* <EventCard__Title>{res.title}</EventCard__Title>
+      <EventCard__Title>{res.title}</EventCard__Title>
       <EventCard__Text>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -79,14 +104,14 @@ export default ({ res, toggleVisible, visible, RSVPRef }) => {
         velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum."
-      </EventCard__Text> */}
-      {/* <ScrollTo smooth={true}>
+      </EventCard__Text>
+      <ScrollTo smooth={true}>
         {({ scroll }) => (
           <StyledButton onClick={() => goToRSVP(scroll)} visible={visible}>
             RSVP
           </StyledButton>
         )}
-      </ScrollTo> */}
+      </ScrollTo>
     </EventCard>
   )
 }

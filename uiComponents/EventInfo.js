@@ -2,87 +2,36 @@ import styled from 'styled-components'
 import { CalendarToday as Calendar } from '@styled-icons/material-rounded/CalendarToday'
 import { PinDrop } from '@styled-icons/material/PinDrop'
 import screenSizes from '../utils/screen-sizes'
-import dynamic from 'next/dynamic'
 
 const EventInfo = styled.div`
-  position: relative;
-  justify-content: flex-end;
-
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex: 0.6;
-  /* margin-top: 50px; */
-  /* height: 700px; */
-  height: 100vh;
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    height: 700px;
-    flex: 0 1 auto;
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    flex: 0 1 auto;
-    height: 700px;
-  }
-`
-
-const MainInfo__wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    flex-direction: row;
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    flex-direction: column;
-  }
-`
-
-const MapContainer = styled.div`
-  padding-bottom: 50px;
-`
-
-const MainInfo = styled.div`
-  display: flex;
-  flex-direction: ${(props) => (props.row ? 'row' : 'column')};
-  justify-content: flex-start;
-  align-items: center;
-  margin: ${(props) => (props.row ? '60px 0' : '0')};
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    flex-direction: column;
-    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    flex-direction: column;
-    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
-  }
-`
-
-const MainInfoLong = styled.div`
+  height: 600px;
+  background-color: ${({ theme }) => theme.colors.black};
+  align-items: space-between;
+  justify-content: space-evenly;
   position: absolute;
-  top: 20px;
-  right: 60px;
-  background-color: ${({ theme }) => theme.colors.accentprimary};
-  height: 200px;
-  width: 800px;
+  bottom: 150px;
+  right: 3%;
+  z-index: 1;
+  padding: 0 10px;
 
-  display: flex;
-  flex-direction: ${(props) => (props.row ? 'row' : 'column')};
-  justify-content: flex-start;
-  align-items: center;
-
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    flex-direction: column;
-    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
+  @media only screen and (max-width: 1000px) {
+    right: 2%;
   }
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    flex-direction: column;
-    margin: ${(props) => (props.row ? '60px 0' : '80px 0')};
+  @media only screen and (max-width: 800px) {
+    position: static;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 414px) {
+  }
+
+  @media only screen and (max-width: 375px) {
+  }
+
+  @media only screen and (max-width: 320px) {
   }
 `
 
@@ -94,12 +43,24 @@ const MainInfo__box = styled.div`
 `
 
 const MainInfo__text = styled.div`
-  color: ${(props) => props.theme.colors.gentext};
+  color: ${(props) => props.theme.colors.white};
   font-size: ${({ theme }) => theme.fonts.text};
-  padding: 5px 20px;
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 1100px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 800px) {
     font-size: ${({ theme }) => theme.fonts.textphone};
+  }
+
+  @media only screen and (max-width: 414px) {
+  }
+
+  @media only screen and (max-width: 375px) {
+  }
+
+  @media only screen and (max-width: 320px) {
   }
 `
 
@@ -108,7 +69,10 @@ const InfoTitle = styled.div`
   color: ${(props) => props.theme.colors.primary};
   margin-bottom: 10px;
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 1100px) {
+    font-size: 25px;
+  }
+  @media only screen and (max-width: 800px) {
     font-size: ${({ theme }) => theme.fonts.titlephone};
   }
 `
@@ -135,41 +99,28 @@ const Pin = styled(PinDrop)`
   }
 `
 
-const DynamicComponentWithNoSSR = dynamic(
-  () => import('../containerComponents/Map'),
-  {
-    ssr: false,
-  }
-)
-
 export default ({ res }) => {
   return (
     <>
       <EventInfo>
-        <MainInfoLong row>
-          <MainInfo__box>
-            <Pin />
-            <MainInfo__text>{res.address}</MainInfo__text>
-          </MainInfo__box>
-          <MainInfo__box>
-            <Cal />
-            <MainInfo__text>{res.date}</MainInfo__text>
-            <MainInfo__text>{res.time}</MainInfo__text>
-          </MainInfo__box>
-        </MainInfoLong>
-        <MainInfo__wrapper>
-          <MapContainer>
-            <DynamicComponentWithNoSSR res={res} />
-          </MapContainer>
-          <MainInfo>
-            <InfoTitle>Hosts</InfoTitle>
-            <MainInfo__box row>
-              {res.hosts.map((name) => (
-                <MainInfo__text>{name}</MainInfo__text>
-              ))}
-            </MainInfo__box>
-          </MainInfo>
-        </MainInfo__wrapper>
+        <MainInfo__box>
+          <Pin />
+          <MainInfo__text>{res.address}</MainInfo__text>
+        </MainInfo__box>
+        <MainInfo__box>
+          <Cal />
+          <MainInfo__text>{res.date}</MainInfo__text>
+          <MainInfo__text>{res.time}</MainInfo__text>
+        </MainInfo__box>
+
+        <MainInfo__box>
+          <InfoTitle>Hosts</InfoTitle>
+          <MainInfo__text>
+            {res.hosts.map((name) => (
+              <div>{name}</div>
+            ))}
+          </MainInfo__text>
+        </MainInfo__box>
       </EventInfo>
     </>
   )
