@@ -35,22 +35,32 @@ const Container = styled.div`
   height: 100vh;
   position: relative;
 
-  @media only screen and (max-width: ${screenSizes.laptop.max}) {
-  }
-
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-  }
-
-  @media only screen and (max-width: ${screenSizes.tablet.min}) {
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 800px) {
     position: static;
     justify-content: space-between;
-    align-items: space-between;
+    align-items: center;
     flex-direction: row;
     height: 100%;
     margin: 0 auto;
+  }
+
+  @media only screen and (max-width: 414px) {
+    align-items: space-between;
+  }
+
+  @media only screen and (max-width: 375px) {
+  }
+
+  @media only screen and (max-width: 320px) {
+  }
+`
+
+const Wrapper = styled.div`
+  @media only screen and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 `
 
@@ -62,21 +72,25 @@ const EventCard = styled.div`
   width: 1000px;
   position: relative;
 
-  @media only screen and (max-width: ${screenSizes.laptop.max}) {
-    width: 900px;
+  @media only screen and (max-width: 1100px) {
+    width: 90%;
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-    width: 800px;
-  }
-
-  @media only screen and (max-width: ${screenSizes.tablet.min}) {
-    width: 50%;
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    width: 200px;
+  @media only screen and (max-width: 800px) {
+    width: 350px;
     position: static;
+  }
+
+  @media only screen and (max-width: 414px) {
+    width: 200px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    width: 150px;
+  }
+
+  @media only screen and (max-width: 320px) {
+    width: 150px;
   }
 `
 
@@ -89,58 +103,76 @@ const EventInfo = styled.div`
   right: 50px;
   z-index: 1;
 
-  @media only screen and (max-width: ${screenSizes.laptop.max}) {
-  }
-
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
-  }
-
-  @media only screen and (max-width: ${screenSizes.tablet.min}) {
+  @media only screen and (max-width: 800px) {
+    width: 350px;
     position: static;
   }
 
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    position: static;
+  @media only screen and (max-width: 414px) {
     width: 200px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    width: 150px;
+  }
+
+  @media only screen and (max-width: 320px) {
+    width: 150px;
   }
 `
 
 const MapContainer = styled.div`
   position: absolute;
   top: 20%;
-  left: 15%;
+  left: 18%;
+  z-index: 1;
+  > div {
+    width: 300px !important;
+    height: 300px !important;
+  }
 
-  @media only screen and (max-width: ${screenSizes.laptop.max}) {
+  @media only screen and (max-width: 1200px) {
     left: 5%;
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+  @media only screen and (max-width: 1100px) {
     left: 2%;
-    top: 15%;
+    > div {
+      width: 250px !important;
+      height: 250px !important;
+    }
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet.min}) {
-    position: static;
-  }
-
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
+  @media only screen and (max-width: 800px) {
     position: static;
     top: 0;
     left: 0;
     margin-top: 50px;
+    > div {
+      width: 350px !important;
+      height: 350px !important;
+    }
   }
-  > div {
-    width: 100px !important;
-    height: 100px !important;
-  }
-`
 
-const Wrapper = styled.div`
-  @media only screen and (max-width: ${screenSizes.smallPhone.max}) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
+  @media only screen and (max-width: 414px) {
+    > div {
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    > div {
+      width: 150px !important;
+      height: 150px !important;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    > div {
+      width: 150px !important;
+      height: 150px !important;
+    }
   }
 `
 
@@ -173,8 +205,6 @@ const EventPage = ({ res }) => {
             visible={visible}
             RSVPRef={RSVPRef}
           ></EventCard>
-
-          {/* <EventInfo res={res} /> */}
         </Container>
 
         <div ref={RSVPRef}>
