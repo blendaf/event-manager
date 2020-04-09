@@ -17,7 +17,7 @@ const InputTitle = styled.div`
   margin: 10px 0;
   width: 100%;
   text-align: center;
-  font-size: ${({ theme }) => theme.fonts.title};
+  font-size: 20px;
 `
 
 const RadioButtons = styled.div`
@@ -118,7 +118,7 @@ const NumberOfGuestsWrapper = styled.div`
 `
 
 const NumberInput = styled.input`
-  border: 2px solid ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.primary};
   width: 50px;
   height: 50px;
   border-radius: 10px;
@@ -202,7 +202,7 @@ const StyledForm = styled.form`
   }
 `
 const TextInput = styled.textarea`
-  border: 2px solid ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: 10px;
   width: 100%;
   height: 60px;
@@ -226,7 +226,7 @@ const TextInput = styled.textarea`
 `
 
 const ShortTextInput = styled.input`
-  border: 2px solid ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: 10px;
   width: 100%;
   height: 40px;

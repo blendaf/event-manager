@@ -2,11 +2,8 @@ import styled from 'styled-components'
 import React, { useState, useRef, useEffect } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { db } from '../../utils/firebaseConfig'
-import screenSizes from '../../utils/screen-sizes'
 import ErrorBox from '../../fragments/ErrorBox'
 import RSVPFormContainer from '../../containerComponents/RSVPFormContainer'
-import EventCard from '../../uiComponents/EventCard'
-import EventInfo from '../../uiComponents/EventInfo'
 import MapContainer from '../../uiComponents/MapContainer'
 
 const GlobalStyle = createGlobalStyle`
@@ -19,42 +16,134 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const Main = styled.div`
+  background-image: url(${'/balloons.jpg'});
+  width: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+`
 const Container = styled.div`
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
+`
+
+const EventCard = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
   width: 100%;
-  height: 100vh;
-  position: relative;
+  height: 500px;
+  border-radius: 3px;
+  margin: 50px;
+  box-shadow: 7px 7px 12px rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+`
 
-  @media only screen and (max-width: 800px) {
-    position: static;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    height: 100%;
-    margin: 0 auto;
+const EventText__Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+
+const Event__Title = styled.div`
+  font-size: 40px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.black};
+  padding-bottom: 20px;
+`
+
+const Event__Text = styled.div`
+  font-size: 15px;
+  font-weight: 200;
+  letter-spacing: 1.5px;
+  color: ${({ theme }) => theme.colors.black};
+  padding: 0 100px;
+`
+
+const Button = styled.button`
+  margin-top: 20px;
+  padding: 15px 80px;
+  background-color: ${({ theme }) => theme.colors.accentprimary};
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s ease;
+  font-size: 15px;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.accentsecondary};
   }
 
-  @media only screen and (max-width: 414px) {
-    align-items: space-between;
-  }
-
-  @media only screen and (max-width: 375px) {
-  }
-
-  @media only screen and (max-width: 320px) {
+  :focus {
+    outline: none;
   }
 `
 
-const Wrapper = styled.div`
-  @media only screen and (max-width: 800px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    flex: 1;
+const InputForm = styled.div`
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 100px;
+`
+
+const InputRow = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 10px 0;
+`
+
+const Input = styled.label`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 5px;
+`
+
+const ShortInput = styled.input`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.accentprimary};
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 100;
+  padding: 10px 0;
+  padding-left: 10px;
+  color: ${({ theme }) => theme.colors.black};
+  transition: all 0.5s ease;
+  :hover {
+    border-color: ${({ theme }) => theme.colors.accentsecondary};
+  }
+
+  :focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.accentprimary};
+  }
+`
+const LongInput = styled.textarea`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.accentprimary};
+  border-radius: 3px;
+  height: 70px;
+  font-size: 15px;
+  font-weight: 100;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: ${({ theme }) => theme.colors.black};
+  transition: all 0.5s ease;
+  :hover {
+    border-color: ${({ theme }) => theme.colors.accentsecondary};
+  }
+  :focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.accentprimary};
   }
 `
 
@@ -74,22 +163,69 @@ const EventPage = ({ res }) => {
     return (
       <>
         <GlobalStyle />
-        <Container>
-          <Wrapper>
-            <EventInfo res={res} />
-            <MapContainer res={res} />
-          </Wrapper>
-          <EventCard
-            res={res}
-            toggleVisible={toggleVisible}
-            visible={visible}
-            RSVPRef={RSVPRef}
-          ></EventCard>
-        </Container>
+        <Main>
+          <Container>
+            <EventCard>
+              <EventText__Wrapper>
+                <Event__Title>{res.title}</Event__Title>
+                <Event__Text>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.
+                </Event__Text>
+              </EventText__Wrapper>
 
-        <div ref={RSVPRef}>
-          <RSVPFormContainer visible={visible} />
-        </div>
+              <Button>RSVP</Button>
+            </EventCard>
+            <EventCard></EventCard>
+            <EventCard>
+              <InputForm action="https://Formspree.io/mgelzazl" method="POST">
+                <InputRow>
+                  <Input>
+                    <ShortInput
+                      type="text"
+                      name="_replyto"
+                      placeholder="Förnamn"
+                    />
+                  </Input>
+                  <Input>
+                    <ShortInput
+                      type="text"
+                      name="_replyto"
+                      placeholder="Efternamn"
+                    />
+                  </Input>
+                </InputRow>
+                <InputRow>
+                  <Input>
+                    <ShortInput
+                      type="text"
+                      name="_replyto"
+                      placeholder="Email"
+                    />
+                  </Input>
+                  <Input>
+                    <ShortInput
+                      type="text"
+                      name="_replyto"
+                      placeholder="Telefonnummer"
+                    />
+                  </Input>
+                </InputRow>
+                <InputRow>
+                  <Input>
+                    <LongInput name="message" placeholder="Ditt meddelande" />
+                  </Input>
+                </InputRow>
+
+                <Button type="submit">Skicka</Button>
+              </InputForm>
+            </EventCard>
+          </Container>
+        </Main>
       </>
     )
   }
