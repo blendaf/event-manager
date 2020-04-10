@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 const MapContainer = styled.div`
-  position: absolute;
-  top: 20%;
-  left: 18%;
-  z-index: 1;
+  padding: 50px 0;
   > div {
     width: 300px !important;
     height: 300px !important;
