@@ -1,6 +1,6 @@
 # Event Manager
 
-A Event/Party Manager app that is developed as a fun private project. The app is developed using React, Next.js, and Firebase.
+A Event/Party Manager app that is developed as a fun private project. The app is developed using React, Next.js, and Firebase. To try the application visit https://event-manager-kappa.now.sh/ and put in event id: '123'.
 
 # Existing Features
 
