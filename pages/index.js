@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { Button } from '../uiComponents/Button'
 import screenSizes from '../utils/screen-sizes'
 import Head from 'next/head'
 import { transparentize } from 'polished'
+import { firebaseContext } from '../FireBaseAuthProvider'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -139,6 +140,7 @@ const CreateButton = styled(Button)`
 
 const Index = () => {
   const [inputValue, setInputValue] = useState('')
+  const { user, signInWithGoogle, signOut } = useContext(firebaseContext)
 
   return (
     <React.Fragment>
@@ -150,7 +152,20 @@ const Index = () => {
           rel="stylesheet"
         />
       </Head>
-      <LoginButton>Log in</LoginButton>
+      {/* {user ? (
+        <>
+          <image src={user.photoURL} alt="profile picture" />
+          <div> {user.displayName} </div>
+          <button onClick={signOut}>sing out</button>
+        </>
+      ) : (
+        <Link href="user/[pid]" as={`user/${inputValue}`}>
+          <LoginButton onClick={signInWithGoogle}>Log in</LoginButton>
+        </Link>
+      )} */}
+      <Link href="user/[pid]" as={`user/${inputValue}`}>
+        <LoginButton onClick={signInWithGoogle}>Log in</LoginButton>
+      </Link>
       <Container>
         <BoxLarge>
           <TitleText>RSVP to an event?</TitleText>
