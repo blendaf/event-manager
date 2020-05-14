@@ -95,7 +95,7 @@ const Event__Title = styled.div`
   padding-bottom: 40px;
 
   @media only screen and (max-width: ${screenSizes.phone.max}) {
-    font-size: ${({ theme }) => theme.fonts.titleSmall};
+    font-size: ${({ theme }) => theme.fonts.title};
   }
 `
 
