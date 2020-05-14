@@ -7,11 +7,10 @@ export const Button = styled.button`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.buttoncontent};
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
-  width: 200px;
-  height: 50px;
-  font-size: ${({ theme }) => theme.fonts.button};
+  padding: 12px 35px;
+  font-size: 15px;
   cursor: pointer;
 
   :focus {
