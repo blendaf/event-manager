@@ -23,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
 
   }
 `
-
 const ErrorButton = styled(Button)`
   margin: 20px auto;
   background-color: ${({ theme }) => theme.colors.accentsecondary};
@@ -32,11 +31,9 @@ const ErrorButton = styled(Button)`
     background-color: ${({ theme }) => theme.colors.black};
   }
 `
-
 const Main = styled.div`
   background-image: url(${'/balloons.jpg'});
   width: 100%;
-
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -57,7 +54,6 @@ const Container = styled.div`
     width: 90%;
   }
 `
-
 const EventCard = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   width: 100%;
@@ -76,7 +72,6 @@ const EventCard = styled.div`
     padding-bottom: 60px;
   }
 `
-
 const EventText__Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -87,7 +82,6 @@ const EventText__Wrapper = styled.div`
     padding: 30px 0px;
   }
 `
-
 const Event__Title = styled.div`
   font-size: 60px;
   font-weight: 800;
@@ -98,7 +92,6 @@ const Event__Title = styled.div`
     font-size: ${({ theme }) => theme.fonts.title};
   }
 `
-
 const Event__Text = styled.div`
   font-size: 15px;
   font-weight: 200;
@@ -114,12 +107,10 @@ const Event__Text = styled.div`
     padding: 0 20px;
   }
 `
-
 const StyledButton = styled(Button)`
   margin: 20px 0;
   padding: 15px 80px;
 `
-
 const EventInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -131,7 +122,6 @@ const EventInfo = styled.div`
     padding: 20px 0px;
   }
 `
-
 const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -143,12 +133,10 @@ const InfoBox = styled.div`
     padding: 0 20px;
   }
 `
-
 const InforBox__text = styled.div`
   color: ${(props) => props.theme.colors.black};
   font-size: 15px;
 `
-
 const Cal = styled(Calendar)`
   height: 60px;
   color: ${(props) => props.theme.colors.black};
@@ -156,7 +144,6 @@ const Cal = styled(Calendar)`
     height: 40px;
   }
 `
-
 const Pin = styled(PinDrop)`
   height: 60px;
   color: ${(props) => props.theme.colors.black};
@@ -165,7 +152,6 @@ const Pin = styled(PinDrop)`
     height: 40px;
   }
 `
-
 const Title = styled.div`
   font-size: 30px;
   color: ${(props) => props.theme.colors.black};
@@ -177,7 +163,7 @@ const Title = styled.div`
   }
 `
 
-const EventPage = ({ res }) => {
+const EventPage = ({ res, pid }) => {
   const RSVPRef = useRef(null)
   const [visible, setVisible] = useState(false)
   const toggleVisible = () => setVisible((oldVisible) => !oldVisible)
@@ -243,8 +229,7 @@ const EventPage = ({ res }) => {
 
             <EventCard ref={RSVPRef}>
               <Title>RSVP to the event</Title>
-              <Form />
-              <StyledButton type="submit">Skicka</StyledButton>
+              <Form pid={pid} />
             </EventCard>
           </Container>
         </Main>
@@ -255,7 +240,6 @@ const EventPage = ({ res }) => {
 
 export async function getServerSideProps(context) {
   const pid = context.params.pid
-
   const res = await db
     .collection('eventpages')
     .doc(pid)
@@ -275,7 +259,7 @@ export async function getServerSideProps(context) {
       console.log('Error getting document:', error)
       return { error: error, message: 'Error getting documents' }
     })
-  return { props: { res: res } }
+  return { props: { res: res, pid: pid } }
 }
 
 export default EventPage

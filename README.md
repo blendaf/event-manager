@@ -8,15 +8,17 @@ A Event/Party Manager app that is developed as a fun private project. The app is
 - Password/id protection
 - Dynamic routing
 - Map using Mapbox API
+- Guest view
+  - RSVP functionality
 
 # Planned Features
 
-- Guest view
-  - RSVP functionality
 - Host view
   - Guest list display
   - Create event
   - Edit event
   - Share event
+  - Log in
+  - View all the users events
 - Save data
   - Address to coordinates

@@ -37,8 +37,22 @@ const Container = styled.div`
   }
 `
 
+const LoginButton = styled(Button)`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 30px;
+  padding: 10px 20px;
+  background-color: ${({ theme }) => theme.colors.accentsecondary};
+  :hover {
+    background-color: ${(props) =>
+      transparentize(0.4, props.theme.colors.accentsecondary)};
+  }
+`
+
 const BoxLarge = styled.div`
   width: 100%;
+  margin-top: 40px;
   padding: 150px 0px;
   background-color: ${({ theme }) => theme.colors.black};
   background-color: #01a4b5;
@@ -47,7 +61,6 @@ const BoxLarge = styled.div`
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
-  margin: 20px 0;
   color: ${({ theme }) => theme.colors.white};
 
   @media only screen and (max-width: ${screenSizes.tablet.max}) {
@@ -105,13 +118,12 @@ const IDInput = styled.input`
 
 const BoxSmall = styled.div`
   padding: 20px;
-  padding-top: 60px;
+  padding-top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
-  margin: 20px 0;
   color: ${({ theme }) => theme.colors.black};
 `
 
@@ -125,9 +137,8 @@ const CreateButton = styled(Button)`
   }
 `
 
-const Index = (props) => {
+const Index = () => {
   const [inputValue, setInputValue] = useState('')
-  const [data, setData] = useState({})
 
   return (
     <React.Fragment>
@@ -139,6 +150,7 @@ const Index = (props) => {
           rel="stylesheet"
         />
       </Head>
+      <LoginButton>Log in</LoginButton>
       <Container>
         <BoxLarge>
           <TitleText>RSVP to an event?</TitleText>

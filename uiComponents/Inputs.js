@@ -79,28 +79,103 @@ const LongInput = styled.textarea`
   }
 `
 
-export default () => {
+export default ({ inputValue, setInputValue }) => {
+  console.log(inputValue.name)
   return (
-    <InputForm action="https://Formspree.io/mgelzazl" method="POST">
+    <InputForm>
       <InputRow>
         <Input>
-          <ShortInput type="text" name="_replyto" placeholder="Förnamn" />
+          <ShortInput
+            type="text"
+            placeholder="Name"
+            value={inputValue.name}
+            onChange={(event) => {
+              const newName = event.target.value
+              setInputValue(({ name, ...rest }) => ({
+                name: newName,
+                ...rest,
+              }))
+            }}
+          />
         </Input>
         <Input>
-          <ShortInput type="text" name="_replyto" placeholder="Efternamn" />
+          <ShortInput
+            type="text"
+            name="_replyto"
+            placeholder="Last Name"
+            value={inputValue.lastName}
+            onChange={(event) => {
+              const newLastName = event.target.value
+              setInputValue(({ lastName, ...rest }) => ({
+                lastName: newLastName,
+                ...rest,
+              }))
+            }}
+          />
         </Input>
       </InputRow>
       <InputRow>
         <Input>
-          <ShortInput type="text" name="_replyto" placeholder="Email" />
+          <ShortInput
+            type="text"
+            name="_replyto"
+            placeholder="Email"
+            value={inputValue.email}
+            onChange={(event) => {
+              const newEmail = event.target.value
+              setInputValue(({ email, ...rest }) => ({
+                email: newEmail,
+                ...rest,
+              }))
+            }}
+          />
         </Input>
         <Input>
-          <ShortInput type="text" name="_replyto" placeholder="Telefonnummer" />
+          <ShortInput
+            type="text"
+            name="_replyto"
+            placeholder="Phone number"
+            value={inputValue.number}
+            onChange={(event) => {
+              const newNumber = event.target.value
+              setInputValue(({ number, ...rest }) => ({
+                number: newNumber,
+                ...rest,
+              }))
+            }}
+          />
         </Input>
       </InputRow>
       <InputRow>
         <Input>
-          <LongInput name="message" placeholder="Ditt meddelande" />
+          <LongInput
+            name="message"
+            placeholder="Names of guests"
+            value={inputValue.namesGuests}
+            onChange={(event) => {
+              const newNamesGuests = event.target.value
+              setInputValue(({ namesGuests, ...rest }) => ({
+                namesGuests: newNamesGuests,
+                ...rest,
+              }))
+            }}
+          />
+        </Input>
+      </InputRow>
+      <InputRow>
+        <Input>
+          <LongInput
+            name="message"
+            placeholder="Your message"
+            value={inputValue.message}
+            onChange={(event) => {
+              const newMessage = event.target.value
+              setInputValue(({ message, ...rest }) => ({
+                message: newMessage,
+                ...rest,
+              }))
+            }}
+          />
         </Input>
       </InputRow>
     </InputForm>

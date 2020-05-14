@@ -83,27 +83,47 @@ const RadioButton = styled.label`
   }
 `
 
-export default () => {
+export default ({ rsvp, setRsvp }) => {
+  const handleOptionChange = (changeEvent) => {
+    setRsvp(changeEvent.target.value)
+    console.log(changeEvent.target.value)
+  }
+
   return (
     <RadioButtons>
       <RadioWrapper>
         <Label>Yes</Label>
         <RadioButton>
-          <input type="radio" name="radio" />
+          <input
+            type="radio"
+            value="yes"
+            checked={rsvp === 'yes'}
+            onChange={handleOptionChange}
+          />
           <span className="checkmark"></span>
         </RadioButton>
       </RadioWrapper>
       <RadioWrapper>
         <Label>No</Label>
         <RadioButton>
-          <input type="radio" name="radio" />
+          <input
+            type="radio"
+            value="no"
+            checked={rsvp === 'no'}
+            onChange={handleOptionChange}
+          />
           <span className="checkmark"></span>
         </RadioButton>
       </RadioWrapper>
       <RadioWrapper>
         <Label>Maybe</Label>
         <RadioButton>
-          <input type="radio" name="radio" />
+          <input
+            type="radio"
+            value="maybe"
+            checked={rsvp === 'maybe'}
+            onChange={handleOptionChange}
+          />
           <span className="checkmark"></span>
         </RadioButton>
       </RadioWrapper>
