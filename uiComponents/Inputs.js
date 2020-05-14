@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, { useState, useRef, useEffect } from 'react'
+import screenSizes from '../utils/screen-sizes'
 
 const InputForm = styled.div`
   display: flex;
@@ -8,8 +9,12 @@ const InputForm = styled.div`
   align-items: center;
   padding: 0 100px;
 
-  @media only screen and (max-width: 1100px) {
+  @media only screen and (max-width: ${screenSizes.laptop.max}) {
     padding: 0 50px;
+  }
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    padding: 0 20px;
+    width: 60%;
   }
 `
 
@@ -17,6 +22,11 @@ const InputRow = styled.div`
   display: flex;
   width: 100%;
   padding: 10px 0;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    flex-direction: column;
+    padding: 0;
+  }
 `
 
 const Input = styled.label`
@@ -24,6 +34,10 @@ const Input = styled.label`
   flex-direction: column;
   flex: 1;
   padding: 0 5px;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    padding: 10px 0;
+  }
 `
 
 const ShortInput = styled.input`
@@ -36,7 +50,6 @@ const ShortInput = styled.input`
   padding-left: 10px;
   color: ${({ theme }) => theme.colors.black};
   transition: all 0.5s ease;
-  width: auto;
   :hover {
     border-color: ${({ theme }) => theme.colors.accentsecondary};
   }

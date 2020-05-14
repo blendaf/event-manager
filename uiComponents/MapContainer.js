@@ -23,7 +23,6 @@ const MapContainer = styled.div`
     position: static;
     top: 0;
     left: 0;
-    margin-top: 50px;
     > div {
       width: 350px !important;
       height: 350px !important;
@@ -38,6 +37,7 @@ const MapContainer = styled.div`
   }
 
   @media only screen and (max-width: 414px) {
+    padding: 20px 0;
     > div {
       width: 200px !important;
       height: 200px !important;

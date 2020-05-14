@@ -17,24 +17,29 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
+  width: 60%;
   height: 100vh;
   margin: 0 auto;
-`
-
-const CenterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+
+  @media only screen and (max-width: ${screenSizes.laptop.max}) {
+    width: 70%;
+  }
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    width: 90%;
+  }
 `
 
 const BoxLarge = styled.div`
-  padding: 80px 40px;
+  width: 100%;
+  padding: 150px 0px;
   background-color: ${({ theme }) => theme.colors.black};
   background-color: #01a4b5;
   display: flex;
@@ -43,18 +48,25 @@ const BoxLarge = styled.div`
   flex-direction: column;
   border-radius: 5px;
   margin: 20px 0;
-  width: 800px;
-  height: 300px;
   color: ${({ theme }) => theme.colors.white};
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    padding: 80px 0px;
+  }
 `
-const BoxTitle = styled.div`
+const TitleText = styled.div`
   font-size: 25px;
   text-align: center;
   padding-bottom: 10px;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    font-size: ${({ theme }) => theme.fonts.titleSmall};
+  }
 `
 
 const ID = styled.form`
   margin: 10px;
+  width: 75%;
 `
 const IDInput = styled.input`
   border-radius: 5px;
@@ -62,7 +74,7 @@ const IDInput = styled.input`
   background-color: ${({ theme }) => theme.colors.white};
   text-align: center;
   color: ${({ theme }) => theme.colors.black};
-  width: 400px;
+  width: 100%;
   height: 50px;
   font-size: 20px;
   transition: all 0.5s ease;
@@ -81,23 +93,13 @@ const IDInput = styled.input`
     border-color: ${({ theme }) => theme.colors.accentprimary};
   }
 
-  @media only screen and (max-width: 600) {
-    width: 300px;
-  }
-`
-const EventButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.accentprimary};
-  color: ${({ theme }) => theme.colors.white};
-  transition: all 0.5s ease;
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.accentsecondary};
-  }
-
-  @media only screen and (max-width: 600) {
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
     height: 40px;
-    width: 80px;
-    border-radius: 5px;
+  }
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    height: 40px;
+    font-size: ${({ theme }) => theme.fonts.textSmall};
   }
 `
 
@@ -116,7 +118,6 @@ const BoxSmall = styled.div`
 const CreateButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.black};
   color: ${({ theme }) => theme.colors.white};
-  transition: all 0.5s ease;
 
   :hover {
     background-color: ${(props) =>
@@ -139,27 +140,25 @@ const Index = (props) => {
         />
       </Head>
       <Container>
-        <CenterWrapper>
-          <BoxLarge>
-            <BoxTitle>RSVP to an event?</BoxTitle>
-            <ID>
-              <IDInput
-                placeholder="Enter event id"
-                value={inputValue}
-                onChange={(event) => setInputValue(event.target.value)}
-              ></IDInput>
-            </ID>
-            <Link href="event/[pid]" as={`event/${inputValue}`}>
-              <EventButton>Go to Event</EventButton>
-            </Link>
-          </BoxLarge>
-          <BoxSmall>
-            <BoxTitle>Create you own event?</BoxTitle>
-            <Link href="event/[pid]" as={`event/${inputValue}`}>
-              <CreateButton>Create event</CreateButton>
-            </Link>
-          </BoxSmall>
-        </CenterWrapper>
+        <BoxLarge>
+          <TitleText>RSVP to an event?</TitleText>
+          <ID>
+            <IDInput
+              placeholder="Enter event id"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+            ></IDInput>
+          </ID>
+          <Link href="event/[pid]" as={`event/${inputValue}`}>
+            <Button>Go to Event</Button>
+          </Link>
+        </BoxLarge>
+        <BoxSmall>
+          <TitleText>Create you own event?</TitleText>
+          <Link href="event/[pid]" as={`event/${inputValue}`}>
+            <CreateButton>Create event</CreateButton>
+          </Link>
+        </BoxSmall>
       </Container>
       <GlobalStyle />
     </React.Fragment>

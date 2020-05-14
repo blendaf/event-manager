@@ -1,12 +1,8 @@
 import styled from 'styled-components'
-import { PlusCircleOutline } from '@styled-icons/evaicons-outline/PlusCircleOutline'
-import { MinusCircleOutline } from '@styled-icons/evaicons-outline/MinusCircleOutline'
-import { Button } from './Button'
-import { useState } from 'react'
-import { transparentize } from 'polished'
 import RadioButtons from './RadioButtons'
 import NumberInput from './NumberInput'
 import Inputs from './Inputs'
+import screenSizes from '../utils/screen-sizes'
 
 const InputTitle = styled.div`
   color: ${(props) => props.theme.colors.black};
@@ -14,6 +10,10 @@ const InputTitle = styled.div`
   width: 100%;
   text-align: center;
   font-size: 20px;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    font-size: ${({ theme }) => theme.fonts.titleSmall};
+  }
 `
 
 const InputSectionWrapper = styled.div`

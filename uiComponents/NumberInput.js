@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import { PlusCircleOutline } from '@styled-icons/evaicons-outline/PlusCircleOutline'
 import { MinusCircleOutline } from '@styled-icons/evaicons-outline/MinusCircleOutline'
-import { Button } from './Button'
 import { useState } from 'react'
-import { transparentize } from 'polished'
+import screenSizes from '../utils/screen-sizes'
 
 const NumberOfGuestsWrapper = styled.div`
   display: flex;
@@ -14,8 +13,8 @@ const NumberOfGuestsWrapper = styled.div`
 
 const NumberInput = styled.input`
   border: 1px solid ${(props) => props.theme.colors.accentprimary};
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 5px;
   margin: 0 5px;
   text-align: center;

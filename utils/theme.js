@@ -14,13 +14,13 @@ const theme = {
   },
   fonts: {
     title: '30px',
-    titlephone: '20px',
+    titleSmall: '20px',
     text: '20px',
-    textphone: '15px',
+    textSmall: '15px',
     input: '20px',
     inputphone: '15px',
-    button: '20px',
-    buttonphone: '15px',
+    button: '15px',
+    buttonSmall: '10px',
   },
   transparencies: {
     inactive: '0.5',

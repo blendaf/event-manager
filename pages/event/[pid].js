@@ -1,10 +1,13 @@
+import Link from 'next/link'
+import screenSizes from '../../utils/screen-sizes'
 import styled from 'styled-components'
 import React, { useState, useRef, useEffect } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { db } from '../../utils/firebaseConfig'
-import ErrorBox from '../../fragments/ErrorBox'
+import ErrorBox from '../../uiComponents/ErrorBox'
 import MapContainer from '../../uiComponents/MapContainer'
 import Form from '../../uiComponents/Form'
+import { Button } from '../../uiComponents/Button'
 import { CalendarToday as Calendar } from '@styled-icons/material-rounded/CalendarToday'
 import { PinDrop } from '@styled-icons/material/PinDrop'
 import { ScrollTo } from 'react-scroll-to'
@@ -12,10 +15,21 @@ import { ScrollTo } from 'react-scroll-to'
 const GlobalStyle = createGlobalStyle`
   body {
    background-color: ${(props) =>
-     props.error ? props.theme.colors.primary : props.theme.colors.background};
+     props.error
+       ? props.theme.colors.accentprimary
+       : props.theme.colors.accent};
    margin: 0;
    font-family: apercu-pro, "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 
+  }
+`
+
+const ErrorButton = styled(Button)`
+  margin: 20px auto;
+  background-color: ${({ theme }) => theme.colors.accentsecondary};
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.black};
   }
 `
 
@@ -34,6 +48,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    width: 90%;
+  }
 `
 
 const EventCard = styled.div`
@@ -45,9 +67,14 @@ const EventCard = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 50px 0;
+  padding-top: 50px;
   padding-bottom: 100px;
   flex-direction: column;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    padding-top: 20px;
+    padding-bottom: 60px;
+  }
 `
 
 const EventText__Wrapper = styled.div`
@@ -55,6 +82,10 @@ const EventText__Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 50px 0;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    padding: 30px 0px;
+  }
 `
 
 const Event__Title = styled.div`
@@ -62,6 +93,10 @@ const Event__Title = styled.div`
   font-weight: 800;
   color: ${({ theme }) => theme.colors.black};
   padding-bottom: 40px;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    font-size: ${({ theme }) => theme.fonts.titleSmall};
+  }
 `
 
 const Event__Text = styled.div`
@@ -69,26 +104,20 @@ const Event__Text = styled.div`
   font-weight: 200;
   letter-spacing: 1.5px;
   color: ${({ theme }) => theme.colors.black};
-  padding: 0 200px;
+  padding: 0 100px;
+
+  @media only screen and (max-width: ${screenSizes.tablet.max}) {
+    padding: 0 30px;
+  }
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    padding: 0 20px;
+  }
 `
 
-const Button = styled.button`
+const StyledButton = styled(Button)`
   margin: 20px 0;
   padding: 15px 80px;
-  background-color: ${({ theme }) => theme.colors.accentprimary};
-  color: ${({ theme }) => theme.colors.white};
-  border-radius: 5px;
-  border: none;
-  transition: all 0.5s ease;
-  font-size: 15px;
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.accentsecondary};
-  }
-
-  :focus {
-    outline: none;
-  }
 `
 
 const EventInfo = styled.div`
@@ -97,6 +126,10 @@ const EventInfo = styled.div`
   align-items: space-between;
   justify-content: space-evenly;
   padding: 50px 0;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    padding: 20px 0px;
+  }
 `
 
 const InfoBox = styled.div`
@@ -104,8 +137,11 @@ const InfoBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 40px;
 
-  width: 200px;
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    padding: 0 20px;
+  }
 `
 
 const InforBox__text = styled.div`
@@ -116,11 +152,18 @@ const InforBox__text = styled.div`
 const Cal = styled(Calendar)`
   height: 60px;
   color: ${(props) => props.theme.colors.black};
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    height: 40px;
+  }
 `
 
 const Pin = styled(PinDrop)`
   height: 60px;
   color: ${(props) => props.theme.colors.black};
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    height: 40px;
+  }
 `
 
 const Title = styled.div`
@@ -128,6 +171,10 @@ const Title = styled.div`
   color: ${(props) => props.theme.colors.black};
   padding: 20px 0;
   font-weight: 600;
+
+  @media only screen and (max-width: ${screenSizes.phone.max}) {
+    font-size: ${({ theme }) => theme.fonts.titleSmall};
+  }
 `
 
 const EventPage = ({ res }) => {
@@ -145,6 +192,9 @@ const EventPage = ({ res }) => {
       <>
         <GlobalStyle error={res.error} />
         <ErrorBox>{res.message}</ErrorBox>
+        <Link href="/">
+          <ErrorButton>Try another id</ErrorButton>
+        </Link>
       </>
     )
   } else {
@@ -167,9 +217,12 @@ const EventPage = ({ res }) => {
               </EventText__Wrapper>
               <ScrollTo smooth={true}>
                 {({ scroll }) => (
-                  <Button onClick={() => goToRSVP(scroll)} visible={visible}>
+                  <StyledButton
+                    onClick={() => goToRSVP(scroll)}
+                    visible={visible}
+                  >
                     RSVP
-                  </Button>
+                  </StyledButton>
                 )}
               </ScrollTo>
 
@@ -191,7 +244,7 @@ const EventPage = ({ res }) => {
             <EventCard ref={RSVPRef}>
               <Title>RSVP to the event</Title>
               <Form />
-              <Button type="submit">Skicka</Button>
+              <StyledButton type="submit">Skicka</StyledButton>
             </EventCard>
           </Container>
         </Main>
