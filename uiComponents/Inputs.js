@@ -94,9 +94,9 @@ export default ({ inputValue, setInputValue }) => {
   const classes = useStyles()
   return (
     <>
-      <InputForm className={classes.root} noValidate autoComplete="off">
+      {/* <InputForm className={classes.root} noValidate autoComplete="off">
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      </InputForm>
+      </InputForm> */}
       <InputForm>
         <InputRow>
           <Input>
